@@ -63,7 +63,7 @@ sudo git submodule update --init --recursive
 # Patch Nginx and OpenSSL
 # These patches will change based on Nginx release. Don't assume they will always work with a new release.
 cd /usr/src/nginx-${NGINX_VER}
-sudo curl https://raw.githubusercontent.com/nginx-modules/ngx_http_tls_dyn_size/master/nginx__dynamic_tls_records_1.15.5%2B.patch | patch -p1sudo curl https://raw.githubusercontent.com/kn007/patch/master/nginx_auto_using_PRIORITIZE_CHACHA.patch | patch -p1
+sudo curl https://raw.githubusercontent.com/nginx-modules/ngx_http_tls_dyn_size/master/nginx__dynamic_tls_records_1.15.5%2B.patch | patch -p1
 sudo curl https://raw.githubusercontent.com/centminmod/centminmod/123.09beta01/patches/cloudflare/nginx-1.15.3_http2-hpack.patch | patch -p1
 sudo curl https://raw.githubusercontent.com/kn007/patch/master/nginx_auto_using_PRIORITIZE_CHACHA.patch | patch -p1
 cd /usr/src/openssl-${OPENSSL_VER}

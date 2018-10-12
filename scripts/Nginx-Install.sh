@@ -223,6 +223,8 @@ echo "Please note, Cloudflare's Origin Pull Certificate has an expiration date. 
 echo ""
 echo "Current Certificate expiration:"
 echo "$(openssl x509 -startdate -enddate -noout -in /etc/nginx/ssl/cloudflare/origin-pull-ca.pem)"
+echo ""
+echo ""
 sleep 5
 
 # SSL DHParam

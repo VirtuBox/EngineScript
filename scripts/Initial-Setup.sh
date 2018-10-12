@@ -47,13 +47,13 @@ echo ""
 echo "        Server needs to be rebooted at the end of this script."
 echo "        Enter command enginescript after reboot to continue."
 echo ""
-echo "        Script will continue in 10 seconds..."
+echo "        Script will continue in 5 seconds..."
 echo ""
 echo "============================================================="
 echo ""
 echo ""
 echo ""
-sleep 10
+sleep 5
 
 # Update server and install dependencies
 sudo apt update

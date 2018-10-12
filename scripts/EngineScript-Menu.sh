@@ -86,7 +86,7 @@ while true
           break
           ;;
         "Update EngineScript")
-          sudo bash /usr/lib/EngineScript/scripts/Update-EngineScript.sh
+          sudo bash /usr/lib/EngineScript/scripts/EngineScript-Update.sh
           break
           ;;
         "Update Existing Domain Vhost File")

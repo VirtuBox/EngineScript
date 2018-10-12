@@ -110,7 +110,8 @@ sleep 3
 # PCRE
 sudo wget https://ftp.pcre.org/pub/pcre/pcre-8.42.tar.gz && sudo tar xzvf pcre-8.42.tar.gz
 cd /usr/src/pcre-8.42
-./configure --prefix=/usr \
+./configure \
+  --prefix=/usr \
   --enable-utf8 \
   --enable-unicode-properties \
   --enable-pcre16 \
@@ -122,12 +123,15 @@ cd /usr/src/pcre-8.42
 
 sudo make -j ${CPU_COUNT}
 sudo make install
+mv -v /usr/lib/libpcre.so.* /lib
+ln -sfv ../../lib/$(readlink /usr/lib/libpcre.so) /usr/lib/libpcre.so
 echo ""
 echo "============================================================="
 echo ""
 echo "        PCRE installation completed."
 echo ""
 echo "============================================================="
+sleep 3
 
 # Jemalloc
 sudo apt install libjemalloc1 libjemalloc-dev

@@ -51,4 +51,4 @@ sleep 5
 
 # Cleanup
 cd /usr/src
-rm -rf *.tar.gz
+rm -rf *.tar.gz*

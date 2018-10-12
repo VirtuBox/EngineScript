@@ -160,6 +160,6 @@ echo "        Server rebooting now..."
 
 # Cleanup
 cd /usr/src
-rm -rf *.tar.gz
+rm -rf *.tar.gz*
 
 shutdown -r now

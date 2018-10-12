@@ -45,4 +45,4 @@ sudo bash /usr/lib/EngineScript/scripts/Tools-Install.sh
 
 # Cleanup
 cd /usr/src
-rm -rf *.tar.gz
+rm -rf *.tar.gz*

@@ -82,10 +82,13 @@ echo "============================================================="
 sleep 5
 
 # Alias Creation
+
+cat <<EOT >> /root/.bashrc
 alias enginescript="sudo bash /usr/lib/EngineScript/scripts/EngineScript-Menu.sh"
 alias esmenu="sudo bash /usr/lib/EngineScript/scripts/EngineScript-Menu.sh"
 alias esrestart="sudo service nginx restart && service php7.2-fpm restart"
 alias esupdate="sudo apt update && sudo apt upgrade && sudo apt dist-upgrade"
+EOT
 
 # GCC
 sudo add-apt-repository -y ppa:ubuntu-toolchain-r/ppa

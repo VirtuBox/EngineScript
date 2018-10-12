@@ -90,9 +90,9 @@ sudo ./configure \
   --build=nginx-enginescript \
   --group=www-data \
   --user=www-data \
-  --add-module=/usr/src/headers-more-nginx-module-0.33 \
+  --add-module=/usr/src/headers-more-nginx-module-${NGINX_HEADER_VER} \
   --add-module=/usr/src/ngx_brotli \
-  --add-module=/usr/src/ngx_cache_purge-2.5 \
+  --add-module=/usr/src/ngx_cache_purge-${NGINX_PURGE_VER} \
   --without-http_browser_module \
   --without-http_empty_gif_module \
   --without-http_memcached_module \
@@ -111,9 +111,9 @@ sudo ./configure \
   --with-http_v2_hpack_enc \
   --with-http_v2_module \
   --with-libatomic \
-  --with-openssl=/usr/src/openssl-1.1.1 \
+  --with-openssl=/usr/src/openssl-${$OPENSSL_VER} \
   --with-openssl-opt='enable-ec_nistp_64_gcc_128 enable-tls1_3 no-nextprotoneg no-psk no-srp no-ssl2 no-ssl3 no-weak-ssl-ciphers zlib -ljemalloc -march=native -Wl,-flto' \
-  --with-pcre=/usr/src/pcre-8.42 \
+  --with-pcre=/usr/src/pcre-${PCRE_VER} \
   --with-pcre-jit \
   --with-zlib=/usr/src/zlib-cf
 

@@ -201,19 +201,18 @@ sudo wget https://raw.githubusercontent.com/VisiStruct/EngineScript/master/nginx
 sudo wget https://raw.githubusercontent.com/VisiStruct/EngineScript/master/misc/logrotate.d/nginx -O /etc/logrotate.d/nginx
 
 # Cloudflare
+# Run Cloudflare Script and Write .conf File
 sudo wget https://raw.githubusercontent.com/VisiStruct/EngineScript/master/nginx/scripts/cloudflare-nginx-ip-updater.sh -P /etc/nginx/scripts
 sudo chmod x /etc/nginx/scripts/cloudflare-nginx-ip-updater.sh
+sudo bash /etc/nginx/scripts/cloudflare-nginx-ip-updater.sh
 
-# Cron Variables
+# Cloudflare Script Cron Variables
 CRONCMD="/etc/nginx/scripts/cloudflare-nginx-ip-updater.sh > /dev/null 2>&1"
 CRONJOB="0 3 * * sun ${CRONCMD}"
 
 # Set Cronjob
 # To remove:        ( crontab -l | grep -v -F "${CRONCMD}" ) | crontab -
 ( crontab -l | grep -v -F "${CRONCMD}" ; echo "${CRONJOB}" ) | crontab -
-
-# Run Cloudflare Script and Write .conf File
-sudo bash /etc/nginx/scripts/cloudflare-nginx-ip-updater.sh
 
 # Cloudflare Origin Pull Certificate
 sudo wget -O /etc/nginx/ssl/cloudflare/origin-pull-ca.pem https://support.cloudflare.com/hc/en-us/article_attachments/201243967/origin-pull-ca.pem

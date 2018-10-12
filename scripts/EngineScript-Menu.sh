@@ -73,7 +73,7 @@ while true
     echo "What would you like to do?"
     echo ""
     PS3='Please enter your choice: '
-    options=("Setup EngineScript WordPress LEMP Server (Installs Nginx, PHP, MariaDB, and Tools)" "Configure New Domain" "Update EngineScript" "Update Existing Domain Vhost File" "Update Nginx" "Update PHP" "Update MariaDB" "Server Management Tools" "Exit EngineScript")
+    options=("Setup EngineScript WordPress LEMP Server (Installs Nginx, PHP, MariaDB, and Tools)" "Configure New Domain" "Update EngineScript" "Update Existing Domain Vhost File" "Update Nginx" "Update PHP" "Update MariaDB" "Update Server Management Tools" "Exit EngineScript")
     select opt in "${options[@]}"
     do
       case $opt in

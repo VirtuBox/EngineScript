@@ -233,7 +233,6 @@ sudo openssl dhparam -dsaparam -out dhparam.pem 2048
 # Start Nginx Service
 sudo systemctl enable nginx.service
 sudo systemctl start nginx.service
-sudo systemctl status nginx.service
 
 echo ""
 echo "============================================================="

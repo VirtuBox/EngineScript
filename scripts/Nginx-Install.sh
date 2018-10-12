@@ -179,11 +179,6 @@ sudo chown -hR www-data:www-data /var/log/domains
 # We use CentOS style because we like it better. Sue us.
 sudo rm -rf /etc/nginx/sites-enabled && sudo rm -rf /etc/nginx/sites-available
 
-# Start Nginx Service
-sudo systemctl enable nginx.service
-sudo systemctl start nginx.service
-sudo systemctl status nginx.service
-
 # Custom Error Pages
 sudo rm -rf /var/www/error
 sudo git clone https://github.com/alexphelps/server-error-pages.git /var/www/error
@@ -234,8 +229,10 @@ sleep 5
 cd /etc/nginx/ssl
 sudo openssl dhparam -dsaparam -out dhparam.pem 2048
 
-# Start Nginx
-sudo service nginx restart
+# Start Nginx Service
+sudo systemctl enable nginx.service
+sudo systemctl start nginx.service
+sudo systemctl status nginx.service
 
 echo ""
 echo "============================================================="

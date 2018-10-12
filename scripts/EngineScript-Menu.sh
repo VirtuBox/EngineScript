@@ -78,35 +78,35 @@ while true
     do
       case $opt in
         "Setup EngineScript WordPress LEMP Server (Installs Nginx, PHP, MariaDB, and Tools)")
-          bash /usr/lib/EngineScript/scripts/EngineScript-Install.sh
+          sudo bash /usr/lib/EngineScript/scripts/EngineScript-Install.sh
           break
           ;;
         "Configure New Domain")
-          bash /usr/lib/EngineScript/scripts/Domain-Install.sh
+          sudo bash /usr/lib/EngineScript/scripts/Domain-Install.sh
           break
           ;;
         "Update EngineScript")
-          bash /usr/lib/EngineScript/scripts/Update-EngineScript.sh
+          sudo bash /usr/lib/EngineScript/scripts/Update-EngineScript.sh
           break
           ;;
         "Update Existing Domain Vhost File")
-          bash /usr/lib/EngineScript/scripts/Domain-Install.sh
+          sudo bash /usr/lib/EngineScript/scripts/Domain-Install.sh
           break
           ;;
         "Update Nginx")
-          bash /usr/lib/EngineScript/scripts/Nginx-Install.sh
+          sudo bash /usr/lib/EngineScript/scripts/Nginx-Install.sh
           break
           ;;
         "Update PHP")
-          bash /usr/lib/EngineScript/scripts/PHP-Install.sh
+          sudo bash /usr/lib/EngineScript/scripts/PHP-Install.sh
           break
           ;;
         "Update MariaDB")
-          bash /usr/lib/EngineScript/scripts/MariaDB-Install.sh
+          sudo bash /usr/lib/EngineScript/scripts/MariaDB-Install.sh
           break
           ;;
         "Update Server Management Tools")
-          bash /usr/lib/EngineScript/scripts/Tools-Install.sh
+          sudo bash /usr/lib/EngineScript/scripts/Tools-Install.sh
           break
           ;;
         "Exit EngineScript")

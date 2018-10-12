@@ -87,7 +87,7 @@ sudo ./configure \
   --pid-path=/var/run/nginx.pid \
   --prefix=/usr/local/nginx \
   --sbin-path=/usr/sbin/nginx \
-  --build=nginx-visistruct \
+  --build=nginx-enginescript \
   --group=www-data \
   --user=www-data \
   --add-module=/usr/src/headers-more-nginx-module-0.33 \

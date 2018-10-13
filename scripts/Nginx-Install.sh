@@ -209,6 +209,10 @@ sudo wget https://raw.githubusercontent.com/VisiStruct/EngineScript/master/nginx
 sudo chmod x /etc/nginx/scripts/cloudflare-nginx-ip-updater.sh
 sudo bash /etc/nginx/scripts/cloudflare-nginx-ip-updater.sh
 
+# Retrieve Cloudflare Origin Pull Cert
+sudo wget -O /etc/nginx/ssl/cloudflare/origin-pull-ca.pem https://support.cloudflare.com/hc/en-us/article_attachments/201243967/origin-pull-ca.pem
+
+# Create Cron Jobs
 sudo cat > /etc/cron.monthly/cfipopc.sh <<EOF
 #!/usr/bin/env bash
 
@@ -241,8 +245,6 @@ echo ""
 echo "============================================================="
 echo ""
 echo "        Nginx setup completed."
-echo ""
-echo "        Returning to main menu in 5 seconds..."
 echo ""
 echo "============================================================="
 echo ""

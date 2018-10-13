@@ -126,6 +126,15 @@ alias esmenu="sudo bash /usr/lib/EngineScript/scripts/EngineScript-Menu.sh"
 alias esrestart="sudo service nginx restart && service php7.2-fpm restart"
 alias esupdate="sudo apt update && sudo apt upgrade && sudo apt dist-upgrade"
 EOT
+
+echo "============================================================="
+echo ""
+echo ""
+echo "        Server needs to reboot."
+echo ""
+echo "        Enter command enginescript after reboot to continue."
+echo ""
+echo "============================================================="
 sleep 2
 echo "        Server will reboot in 10 seconds..."
 echo ""

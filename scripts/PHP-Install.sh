@@ -67,8 +67,6 @@ echo "============================================================="
 echo ""
 echo "        PHP ${PHP_VER} setup completed."
 echo ""
-echo "        Returning to main menu in 5 seconds..."
-echo ""
 echo "============================================================="
 echo ""
 sleep 5

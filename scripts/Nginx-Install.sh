@@ -13,21 +13,8 @@
 # OS:          Ubuntu 16.04 Xenial & Ubuntu 18.04 Biotic
 #----------------------------------------------------------------------------
 
-# Variables
-CPU_COUNT="$(nproc --all)"
-CURRENT_PATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-IP_ADDRESS="$(ip route get 8.8.8.8 | awk 'NR==1 {print $NF}')"
-MARIADB_VER="10.3"
-NGINX_HEADER_VER="0.33"
-NGINX_PURGE_VER="2.5"
-NGINX_VER="1.15.5"
-OPENSSL_VER="1.1.1"
-PCRE_VER="8.42"
-PHPMYADMIN_VER="4.8.3"
-PHP_VER="7.2"
-MARIADB_VER="10.3"
-UBUNTU_VER="$(lsb_release -sc)"
-ZLIB_VER="1.2.11"
+## Variables
+source /usr/lib/EngineScript/misc/variables/variables
 
 # Check current users ID. If user is not 0 (root), exit.
 if [ "${EUID}" != 0 ];
@@ -170,8 +157,8 @@ sudo mkdir -p /var/lib/nginx/body
 sudo mkdir -p /var/lib/nginx/fastcgi
 sudo mkdir -p /var/lib/nginx/proxy
 sudo mkdir -p /var/log/domains
-sudo mkdir -p /var/www/error
 sudo mkdir -p /var/www/admin/tools
+sudo mkdir -p /var/www/error
 sudo mkdir -p /etc/nginx/config-backups
 
 # Assign Nginx Log Permissions
@@ -217,7 +204,6 @@ sudo cat > /etc/cron.monthly/cfipopc.sh <<EOF
 
 sudo wget -O /etc/nginx/ssl/cloudflare/origin-pull-ca.pem https://support.cloudflare.com/hc/en-us/article_attachments/201243967/origin-pull-ca.pem
 sudo bash /etc/nginx/scripts/cloudflare-nginx-ip-updater.sh
-
 EOF
 
 # Cloudflare Origin Pull Certificate

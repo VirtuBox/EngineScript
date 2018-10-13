@@ -14,20 +14,7 @@
 #----------------------------------------------------------------------------
 
 # Variables
-CPU_COUNT="$(nproc --all)"
-CURRENT_PATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-IP_ADDRESS="$(ip route get 8.8.8.8 | awk 'NR==1 {print $NF}')"
-MARIADB_VER="10.3"
-NGINX_HEADER_VER="0.33"
-NGINX_PURGE_VER="2.5"
-NGINX_VER="1.15.5"
-OPENSSL_VER="1.1.1"
-PCRE_VER="8.42"
-PHPMYADMIN_VER="4.8.3"
-PHP_VER="7.2"
-MARIADB_VER="10.3"
-UBUNTU_VER="$(lsb_release -sc)"
-ZLIB_VER="1.2.11"
+source /usr/lib/EngineScript/misc/variables/variables
 
 # Check current users ID. If user is not 0 (root), exit.
 if [ "${EUID}" != 0 ];

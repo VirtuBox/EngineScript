@@ -59,6 +59,7 @@ echo ""
 sleep 5
 
 # Update server and install dependencies
+sudo add-apt-repository -y ppa:ubuntu-toolchain-r/ppa
 sudo apt update
 sudo apt upgrade -y
 sudo apt dist-upgrade -y
@@ -71,7 +72,6 @@ sudo apt autoclean -y
 sudo rm -rf /var/lib/mysql
 
 # GCC
-sudo add-apt-repository -y ppa:ubuntu-toolchain-r/ppa
 sudo add-apt-repository -y ppa:jonathonf/gcc-8.1
 sudo add-apt-repository -y ppa:jonathonf/gcc
 sudo apt update

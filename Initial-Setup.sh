@@ -7,7 +7,7 @@
 # Website:     https://EngineScript.com
 # GitHub:      https://github.com/VisiStruct/EngineScript
 # Issues:      https://github.com/VisiStruct/EngineScript/issues
-# Tutorial:    https://github.com/VisiStruct/WordPress-LEMP-Server-Ubuntu
+# Based On:    https://github.com/VisiStruct/WordPress-LEMP-Server-Ubuntu
 # License:     GPL v3.0
 # OS:          Ubuntu 16.04 Xenial & Ubuntu 18.04 Biotic
 #
@@ -47,13 +47,13 @@ echo ""
 echo "        Server needs to be rebooted at the end of this script."
 echo "        Enter command enginescript after reboot to continue."
 echo ""
-echo "        Script will continue in 10 seconds..."
+echo "        Script will continue in 5 seconds..."
 echo ""
 echo "============================================================="
 echo ""
 echo ""
 echo ""
-sleep 10
+sleep 5
 
 # Update server and install dependencies
 sudo apt update
@@ -82,9 +82,13 @@ echo "============================================================="
 sleep 5
 
 # Alias Creation
-alias enginescript="sudo bash /usr/lib/EngineScript/scripts/EngineScript.sh"
-alias enginescript restart="sudo service nginx restart && service php7.2-fpm restart"
-alias enginescript update="sudo apt update && sudo apt upgrade && sudo apt dist-upgrade"
+
+cat <<EOT >> /root/.bashrc
+alias enginescript="sudo bash /usr/lib/EngineScript/scripts/EngineScript-Menu.sh"
+alias esmenu="sudo bash /usr/lib/EngineScript/scripts/EngineScript-Menu.sh"
+alias esrestart="sudo service nginx restart && service php7.2-fpm restart"
+alias esupdate="sudo apt update && sudo apt upgrade && sudo apt dist-upgrade"
+EOT
 
 # GCC
 sudo add-apt-repository -y ppa:ubuntu-toolchain-r/ppa
@@ -109,7 +113,8 @@ sleep 3
 # PCRE
 sudo wget https://ftp.pcre.org/pub/pcre/pcre-8.42.tar.gz && sudo tar xzvf pcre-8.42.tar.gz
 cd /usr/src/pcre-8.42
-./configure --prefix=/usr \
+./configure \
+  --prefix=/usr \
   --enable-utf8 \
   --enable-unicode-properties \
   --enable-pcre16 \
@@ -121,6 +126,15 @@ cd /usr/src/pcre-8.42
 
 sudo make -j ${CPU_COUNT}
 sudo make install
+mv -v /usr/lib/libpcre.so.* /lib
+ln -sfv ../../lib/$(readlink /usr/lib/libpcre.so) /usr/lib/libpcre.so
+echo ""
+echo "============================================================="
+echo ""
+echo "        PCRE installation completed."
+echo ""
+echo "============================================================="
+sleep 3
 
 # Jemalloc
 sudo apt install libjemalloc1 libjemalloc-dev
@@ -146,6 +160,6 @@ echo "        Server rebooting now..."
 
 # Cleanup
 cd /usr/src
-rm -rf *.tar.gz
+rm -rf *.tar.gz*
 
-#shutdown -r now
+shutdown -r now

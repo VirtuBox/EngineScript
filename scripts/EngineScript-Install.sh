@@ -37,6 +37,11 @@ fi
 #----------------------------------------------------------------------------
 # Main Script Start
 
+# Update Server
+sudo apt update
+sudo apt upgrade -y
+sudo apt dist-upgrade -y
+
 # Configure EngineScript Server
 sudo bash /usr/lib/EngineScript/scripts/PHP-Install.sh
 sudo bash /usr/lib/EngineScript/scripts/Nginx-Install.sh

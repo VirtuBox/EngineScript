@@ -111,7 +111,7 @@ sudo ./configure \
   --with-http_v2_hpack_enc \
   --with-http_v2_module \
   --with-libatomic \
-  --with-openssl=/usr/src/openssl-${$OPENSSL_VER} \
+  --with-openssl=/usr/src/openssl-${OPENSSL_VER} \
   --with-openssl-opt='enable-ec_nistp_64_gcc_128 enable-tls1_3 no-nextprotoneg no-psk no-srp no-ssl2 no-ssl3 no-weak-ssl-ciphers zlib -ljemalloc -march=native -Wl,-flto' \
   --with-pcre=/usr/src/pcre-${PCRE_VER} \
   --with-pcre-jit \
@@ -206,26 +206,18 @@ sudo wget https://raw.githubusercontent.com/VisiStruct/EngineScript/master/nginx
 sudo chmod x /etc/nginx/scripts/cloudflare-nginx-ip-updater.sh
 sudo bash /etc/nginx/scripts/cloudflare-nginx-ip-updater.sh
 
-# Cloudflare Cron Variables
-CFIP="sudo bash /etc/nginx/scripts/cloudflare-nginx-ip-updater.sh > /dev/null 2>&1"
-CFIPJOB="0 3 * * sun ${CFIP}"
-CFORGCERT="sudo wget -O /etc/nginx/ssl/cloudflare/origin-pull-ca.pem https://support.cloudflare.com/hc/en-us/article_attachments/201243967/origin-pull-ca.pem
-h > /dev/null 2>&1"
-CFORGJOB="0 3 * * sun ${CFORGCERT}"
+sudo cat > /etc/cron.monthly/cfipopc.sh <<EOF
+#!/usr/bin/env bash
 
-# Set Cloudflare IP Update Script CronJob
-# To remove:        ( crontab -l | grep -v -F "${CFIP}" ) | crontab -
-( crontab -l | grep -v -F "${CFIP}" ; echo "${CFIPJOB}" ) | crontab -
+sudo wget -O /etc/nginx/ssl/cloudflare/origin-pull-ca.pem https://support.cloudflare.com/hc/en-us/article_attachments/201243967/origin-pull-ca.pem
+sudo bash /etc/nginx/scripts/cloudflare-nginx-ip-updater.sh
 
-# Set Cloudflare IP Update Script CronJob
-# To remove:        ( crontab -l | grep -v -F "${CFORGCERT}" ) | crontab -
-( crontab -l | grep -v -F "${CFORGCERT}" ; echo "${CFORGJOB}" ) | crontab -
+EOF
 
 # Cloudflare Origin Pull Certificate
-sudo wget -O /etc/nginx/ssl/cloudflare/origin-pull-ca.pem https://support.cloudflare.com/hc/en-us/article_attachments/201243967/origin-pull-ca.pem
 echo ""
 echo ""
-echo "Please note, Cloudflare's Origin Pull Certificate has an expiration date. The current certificate expires on January 12, 2020."
+echo "Please note, Cloudflare's Origin Pull Certificate has an expiration date."
 echo "We've set a monthly cronjob to retrive the latest certificate."
 echo ""
 echo "Current Certificate expiration:"

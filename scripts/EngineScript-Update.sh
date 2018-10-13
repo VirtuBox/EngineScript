@@ -10,7 +10,6 @@
 # Based On:    https://github.com/VisiStruct/WordPress-LEMP-Server-Ubuntu
 # License:     GPL v3.0
 # OS:          Ubuntu 16.04 Xenial & Ubuntu 18.04 Biotic
-#
 #----------------------------------------------------------------------------
 
 # Variables

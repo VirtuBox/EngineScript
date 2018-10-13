@@ -46,11 +46,11 @@ sudo wget https://nginx.org/download/nginx-${NGINX_VER}.tar.gz && sudo tar -xzvf
 sudo wget https://github.com/openresty/headers-more-nginx-module/archive/v${NGINX_HEADER_VER}.tar.gz && sudo tar -xzf v${NGINX_HEADER_VER}.tar.gz
 sudo wget https://github.com/nginx-modules/ngx_cache_purge/archive/${NGINX_PURGE_VER}.tar.gz && sudo tar -xzf ${NGINX_PURGE_VER}.tar.gz
 sudo wget https://www.openssl.org/source/openssl-${OPENSSL_VER}.tar.gz && sudo tar -xzf openssl-${OPENSSL_VER}.tar.gz
-sudo wget https://ftp.pcre.org/pub/pcre/pcre-${PCRE_VER}.tar.gz && sudo tar xzvf pcre-${PCRE_VER}.tar.gz
 sudo wget https://www.zlib.net/zlib-${ZLIB_VER}.tar.gz && sudo tar xzvf zlib-${ZLIB_VER}.tar.gz
 
 # Cloudflare zlib Fork
 # Change Nginx compile command from zlib-cf if you want official release. It's already downloaded in /usr/src
+sudo rm -rf /usr/src/zlib-cf
 sudo git clone https://github.com/cloudflare/zlib.git -b gcc.amd64 zlib-cf
 cd /usr/src/zlib-cf
 sudo make -f Makefile.in distclean

@@ -147,6 +147,8 @@ echo "        Jemmalloc installation completed."
 echo ""
 echo "        Server needs to reboot to enable Jemalloc."
 echo ""
+echo "        Enter command enginescript after reboot to continue."
+echo ""
 echo "============================================================="
 echo ""
 sleep 2

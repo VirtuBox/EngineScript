@@ -206,19 +206,27 @@ sudo wget https://raw.githubusercontent.com/VisiStruct/EngineScript/master/nginx
 sudo chmod x /etc/nginx/scripts/cloudflare-nginx-ip-updater.sh
 sudo bash /etc/nginx/scripts/cloudflare-nginx-ip-updater.sh
 
-# Cloudflare Script Cron Variables
-CRONCMD="/etc/nginx/scripts/cloudflare-nginx-ip-updater.sh > /dev/null 2>&1"
-CRONJOB="0 3 * * sun ${CRONCMD}"
+# Cloudflare Cron Variables
+CFIP="sudo bash /etc/nginx/scripts/cloudflare-nginx-ip-updater.sh > /dev/null 2>&1"
+CFIPJOB="0 3 * * sun ${CFIP}"
+CFORGCERT="sudo wget -O /etc/nginx/ssl/cloudflare/origin-pull-ca.pem https://support.cloudflare.com/hc/en-us/article_attachments/201243967/origin-pull-ca.pem
+h > /dev/null 2>&1"
+CFORGJOB="0 3 * * sun ${CFORGCERT}"
 
-# Set Cronjob
-# To remove:        ( crontab -l | grep -v -F "${CRONCMD}" ) | crontab -
-( crontab -l | grep -v -F "${CRONCMD}" ; echo "${CRONJOB}" ) | crontab -
+# Set Cloudflare IP Update Script CronJob
+# To remove:        ( crontab -l | grep -v -F "${CFIP}" ) | crontab -
+( crontab -l | grep -v -F "${CFIP}" ; echo "${CFIPJOB}" ) | crontab -
+
+# Set Cloudflare IP Update Script CronJob
+# To remove:        ( crontab -l | grep -v -F "${CFORGCERT}" ) | crontab -
+( crontab -l | grep -v -F "${CFORGCERT}" ; echo "${CFORGJOB}" ) | crontab -
 
 # Cloudflare Origin Pull Certificate
 sudo wget -O /etc/nginx/ssl/cloudflare/origin-pull-ca.pem https://support.cloudflare.com/hc/en-us/article_attachments/201243967/origin-pull-ca.pem
 echo ""
 echo ""
-echo "Please note, Cloudflare's Origin Pull Certificate has an expiration date. The current certificate expires on January 12, 2020. Set a calendar reminder so you don't forget to fetch the new certs later."
+echo "Please note, Cloudflare's Origin Pull Certificate has an expiration date. The current certificate expires on January 12, 2020."
+echo "We've set a monthly cronjob to retrive the latest certificate."
 echo ""
 echo "Current Certificate expiration:"
 echo "$(openssl x509 -startdate -enddate -noout -in /etc/nginx/ssl/cloudflare/origin-pull-ca.pem)"

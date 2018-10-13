@@ -70,28 +70,6 @@ sudo apt autoremove -y
 sudo apt autoclean -y
 sudo rm -rf /var/lib/mysql
 
-# Git Clone
-sudo rm -rf /usr/lib/EngineScript
-cd /usr/lib/
-git clone https://github.com/VisiStruct/EngineScript.git
-echo ""
-echo "============================================================="
-echo ""
-echo "        EngineScript installation completed."
-echo ""
-echo "        EngineScript is located in /usr/lib/EngineScript"
-echo ""
-echo "============================================================="
-sleep 5
-
-# Alias Creation
-cat <<EOT >> /root/.bashrc
-alias enginescript="sudo bash /usr/lib/EngineScript/scripts/EngineScript-Menu.sh"
-alias esmenu="sudo bash /usr/lib/EngineScript/scripts/EngineScript-Menu.sh"
-alias esrestart="sudo service nginx restart && service php7.2-fpm restart"
-alias esupdate="sudo apt update && sudo apt upgrade && sudo apt dist-upgrade"
-EOT
-
 # GCC
 sudo add-apt-repository -y ppa:ubuntu-toolchain-r/ppa
 sudo add-apt-repository -y ppa:jonathonf/gcc-8.1
@@ -103,6 +81,7 @@ sudo apt install gcc-8 g++-8 -y
 sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-8 80 --slave /usr/bin/g++ g++ /usr/bin/g++-8
 
 # PCRE
+cd /usr/src
 sudo wget https://ftp.pcre.org/pub/pcre/pcre-8.42.tar.gz && sudo tar xzvf pcre-8.42.tar.gz
 cd /usr/src/pcre-8.42
 ./configure \
@@ -125,16 +104,28 @@ ln -sfv ../../lib/$(readlink /usr/lib/libpcre.so) /usr/lib/libpcre.so
 sudo apt install libjemalloc1 libjemalloc-dev
 touch /etc/ld.so.preload
 echo "/usr/lib/x86_64-linux-gnu/libjemalloc.so" | sudo tee --append /etc/ld.so.preload
+
+# EngineScript Git Clone
+sudo rm -rf /usr/lib/EngineScript
+cd /usr/lib/
+git clone https://github.com/VisiStruct/EngineScript.git
 echo ""
 echo "============================================================="
 echo ""
+echo "        EngineScript installation completed."
 echo ""
-echo "        Server needs to reboot to enable Jemalloc."
-echo ""
-echo "        Enter command enginescript after reboot to continue."
+echo "        EngineScript is located in /usr/lib/EngineScript"
 echo ""
 echo "============================================================="
-echo ""
+sleep 2
+
+# Alias Creation
+cat <<EOT >> /root/.bashrc
+alias enginescript="sudo bash /usr/lib/EngineScript/scripts/EngineScript-Menu.sh"
+alias esmenu="sudo bash /usr/lib/EngineScript/scripts/EngineScript-Menu.sh"
+alias esrestart="sudo service nginx restart && service php7.2-fpm restart"
+alias esupdate="sudo apt update && sudo apt upgrade && sudo apt dist-upgrade"
+EOT
 sleep 2
 echo "        Server will reboot in 10 seconds..."
 echo ""

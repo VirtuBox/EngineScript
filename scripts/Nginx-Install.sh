@@ -52,7 +52,7 @@ sudo wget https://www.zlib.net/zlib-${ZLIB_VER}.tar.gz && sudo tar xzvf zlib-${Z
 # Cloudflare zlib Fork
 # Change Nginx compile command from zlib-cf if you want official release. It's already downloaded in /usr/src
 sudo git clone https://github.com/cloudflare/zlib.git -b gcc.amd64 zlib-cf
-cd zlib-cf
+cd /usr/src/zlib-cf
 sudo make -f Makefile.in distclean
 sudo make install
 
@@ -60,7 +60,7 @@ sudo make install
 sudo rm -rf /usr/src/ngx_brotli
 cd /usr/src
 sudo git clone https://github.com/eustas/ngx_brotli.git
-cd ngx_brotli
+cd /usr/src/ngx_brotli
 sudo git submodule update --init --recursive
 
 # Patch Nginx and OpenSSL

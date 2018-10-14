@@ -255,7 +255,7 @@ EOT
 echo "Thanks! Private Key set"
 echo ""
 sudo cp -r /etc/nginx/ssl/${DOMAIN} /home/EngineScript/user-data/ssl-backups/
-echo "Origin Certificate and Private Key have also been backed up to /home/EngineScript/user-data/ssl-backups"
+echo "Origin Certificate and Private Key have also been backed up to /home/EngineScript/user-data/ssl-backups/${DOMAIN}"
 sleep 3
 
 # Final Cloudflare SSL Steps

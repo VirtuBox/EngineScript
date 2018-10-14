@@ -44,7 +44,7 @@ fi
 # MYSQL Variables
 MYSQL_RPS="ES${RANDOM}WP${RAND_CHAR}U"
 echo "MYSQL_RP=${MYSQL_RPS}" > /home/EngineScript/user-data/mysql-credentials/mysqlrp.txt
-source /home/EngineScript/user-data/mysql-credentials/mysqlrp
+source /home/EngineScript/user-data/mysql-credentials/mysqlrp.txt
 
 # Install MariaDB
 sudo apt update

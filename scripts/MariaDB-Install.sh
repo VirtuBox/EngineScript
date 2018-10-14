@@ -41,16 +41,37 @@ if [ "${UBUNTU_VER}" = biotic ];
     sudo add-apt-repository -y 'deb [arch=amd64,i386,ppc64el] http://nyc2.mirrors.digitalocean.com/mariadb/repo/10.3/ubuntu biotic main'
 fi
 
+# MYSQL Variables
+MYSQL_RPS="ES${RANDOM}WP${RAND_CHAR}U"
+echo "MYSQL_RP=${MYSQL_RPS}" > /home/EngineScript/user-data/mysql-credentials/mysqlrp.txt
+source /home/EngineScript/user-data/mysql-credentials/mysqlrp
+
 # Install MariaDB
 sudo apt update
-sudo apt install mariadb-server mariadb-client -y
-sudo apt update
+sudo sh -c 'apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y mariadb-server mariadb-client'
 sudo apt upgrade -y
 sudo apt dist-upgrade -y
 
-# MySQL Secure installation
-# Answers no to change password, since user just set it. Then answers yes to all other questions.
-mysql_secure_installation
+# MySQL Secure Installation Automated
+sudo mysql_secure_installation <<EOF
+
+y
+${MYSQL_RP}
+${MYSQL_RP}
+y
+y
+y
+y
+EOF
+
+# MySQL Login Details Display
+echo ""
+echo "Your MySQL Login Details:"
+echo "  User: root"
+echo "  Pass: ${MYSQL_RP}"
+echo ""
+echo "Your password has been stored in /home/EngineScript/user-data/mysql-credentials/mysqlrp.txt"
+sleep 10
 
 echo ""
 echo "============================================================="

@@ -63,7 +63,7 @@ sudo add-apt-repository -y ppa:ubuntu-toolchain-r/ppa
 sudo apt update
 sudo apt upgrade -y
 sudo apt dist-upgrade -y
-sudo apt install autotools-dev bc build-essential checkinstall ccache curl debhelper dh-systemd dos2unix gcc git htop imagemagick libatomic-ops-dev libbz2-dev libcurl4-openssl-dev libexpat-dev libgd-dev libgeoip-dev libgmp-dev libgoogle-perftools-dev libluajit-5.1-common libluajit-5.1-dev libmhash-dev libpam0g-dev libpcre3 libpcre3-dev libperl-dev libssl-dev libxml2 libxml2-dev libxslt1-dev make nano openssl perl po-debconf python-pip ruby-dev software-properties-common sudo tar unzip webp wget zip zlibc zlib1g zlib1g-dbg zlib1g-dev -y
+sudo apt install autotools-dev bc build-essential checkinstall ccache curl debhelper dh-systemd dos2unix gcc git htop imagemagick libatomic-ops-dev libbz2-dev libcurl4-openssl-dev libexpat-dev libgd-dev libgeoip-dev libgmp-dev libgoogle-perftools-dev libluajit-5.1-common libluajit-5.1-dev libmhash-dev libpam0g-dev libpcre3 libpcre3-dev libperl-dev libreadline-dev libssl-dev libxml2 libxml2-dev libxslt1-dev make nano openssl perl po-debconf python-pip ruby-dev software-properties-common sudo tar unzip webp wget zip zlibc zlib1g zlib1g-dbg zlib1g-dev -y
 
 # Remove stuff we don't want
 sudo apt remove --purge mysql-server mysql-client mysql-common apache2* php5* nginx nginx-extras -y

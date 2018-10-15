@@ -165,7 +165,7 @@ sudo git clone https://github.com/alexphelps/server-error-pages.git /var/www/err
 # EngineScript Nginx .conf Files
 echo ""
 echo ""
-echo "Backing up existing nginx.conf. Backups can be found in /etc/nginx/config-backups"
+echo "Backing up existing nginx.conf. Backups can be found in /home/EngineScript/user-data/config-backups/nginx"
 sudo cp -r /etc/nginx/nginx.conf /home/EngineScript/user-data/config-backups/nginx/
 sudo cp -r /etc/nginx/globals /home/EngineScript/user-data/config-backups/nginx/
 sleep 3

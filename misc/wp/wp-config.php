@@ -5,7 +5,7 @@ define('DB_NAME', 		'${WPDB}');
 define('DB_USER',		 	'${WPUSER}');
 define('DB_PASSWORD', '${WPPASS}');
 define('DB_CHARSET', 	'utf8');				// Don't change this if in doubt.
-define('DB_HOST', 		'localhost'); 	// Don't change this if in doubt.
+define('DB_HOST', 		'localhost');		// Don't change this if in doubt.
 define('DB_COLLATE', 	'');						// Don't change this if in doubt.
 
 /* Salt Keys

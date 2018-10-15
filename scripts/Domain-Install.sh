@@ -197,6 +197,8 @@ server {
 }
 
 EOT
+sudo mkdir -p /home/EngineScript/user-data/config-backups/nginx/${DOMAIN}
+sudo cp -r /etc/nginx/conf.d/vhost/${DOMAIN}.conf /home/EngineScript/user-data/config-backups/nginx/${DOMAIN}/
 
 # SSL Certificate Input
 echo "Cloudflare SSL Certificate"
@@ -300,6 +302,13 @@ source /home/EngineScript/user-data/mysql-credentials/${DOMAIN}.txt
 echo "WPDB=${DBS}" >> /home/EngineScript/user-data/mysql-credentials/${DOMAIN}
 echo "WPUSER=${DBUSERS}" >> /home/EngineScript/user-data/mysql-credentials/${DOMAIN}
 echo "WPPASS=${DBPASSS}" >> /home/EngineScript/user-data/mysql-credentials/${DOMAIN}
+echo ""
+echo "Randomly generated MySQL database credentials for ${DOMAIN}."
+echo "Database: ${WPDB}"
+echo "User:     ${WPUSER}"
+echo "Password: ${WPPASS}"
+echo ""
+echo "These database credentials have also been backed up to /home/EngineScript/user-data/mysql-credentials/${DOMAIN}.txt"
 
 mysql -u root -p${MYSQL_RP} -e "CREATE USER ${WPUSER}@'localhost' IDENTIFIED BY '${WPPASS}';"
 mysql -u root -p${MYSQL_RP} -e "GRANT index, select, insert, delete, update, create, drop, alter, create temporary tables, execute, lock tables, create view, show view, create routine, alter routine, trigger ON ${WPDB}.* TO ${WPUSER}@'localhost'; FLUSH PRIVILEGES;"
@@ -313,6 +322,7 @@ sudo rmdir /var/www/${DOMAIN}/html/wordpress
 sudo rm -f /var/www/${DOMAIN}/html/wp-content/plugins/hello.php
 sudo mkdir -p /var/www/${DOMAIN}/html/wp-content/uploads
 
+# Create wp-config.php
 sudo cat <<EOT > /var/www/${DOMAIN}/html/wp-config.php
 <?php
 
@@ -389,6 +399,14 @@ if ( !defined('ABSPATH') )
 require_once(ABSPATH . 'wp-settings.php');
 
 EOT
+
+sudo mkdir -p /home/EngineScript/user-data/site-backups/${DOMAIN}
+sudo cp -r /var/www/${DOMAIN}/html/wp-config.php /home/EngineScript/user-data/site-backups/${DOMAIN}/
+echo ""
+
+sudo cp -r /etc/nginx/ssl/${DOMAIN} /home/EngineScript/user-data/ssl-backups/
+echo "Origin Certificate and Private Key have also been backed up to /home/EngineScript/user-data/ssl-backups/${DOMAIN}"
+sleep 3
 
 sudo find /var/www/${DOMAIN}/html/ -type d -exec chmod 755 {} \;
 sudo find /var/www/${DOMAIN}/html/ -type f -exec chmod 644 {} \;

@@ -137,8 +137,9 @@ alias esupdate="sudo apt update && sudo apt upgrade && sudo apt dist-upgrade"
 EOT
 
 # EngineScript Home Directory Creation
+mkdir -p /home/EngineScript/user-data/config-backups/nginx
+mkdir -p /home/EngineScript/user-data/config-backups/php
 mkdir -p /home/EngineScript/user-data/mysql-credentials
-mkdir -p /home/EngineScript/user-data/nginx-config-backups
 mkdir -p /home/EngineScript/user-data/site-backups
 mkdir -p /home/EngineScript/user-data/ssl-backups
 

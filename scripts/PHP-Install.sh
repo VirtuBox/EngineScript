@@ -36,7 +36,7 @@ sudo apt install php7.2 php7.2-bcmath php7.2-cli php7.2-common php7.2-curl php7.
 # Backup existing php.ini
 echo ""
 echo ""
-echo "Backing up existing php.ini. Backup can be found in /etc/php/7.2/fpm/config-backups"
+echo "Backing up existing php.ini. Backup can be found in /home/EngineScript/user-data/config-backups/php"
 sudo cp -r /etc/php/7.2/fpm/php.ini /home/EngineScript/user-data/config-backups/php/
 sleep 3
 

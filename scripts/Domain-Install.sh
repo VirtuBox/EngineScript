@@ -36,6 +36,8 @@ sleep 5
 
 # Domain Input
 echo "For domain name, enter just the domain without https:// or trailing /"
+echo "note:   lowecase text only"
+echo ""
 echo "Examples:    yourdomain.com"
 echo "             yourdomain.net"
 echo ""

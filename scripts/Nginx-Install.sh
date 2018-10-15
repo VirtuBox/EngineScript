@@ -142,6 +142,8 @@ EOT
 sudo mkdir -p /etc/nginx/conf.d
 sudo mkdir -p /etc/nginx/globals
 sudo mkdir -p /etc/nginx/scripts
+sudo mkdir -p /etc/nginx/sites-available
+sudo mkdir -p /etc/nginx/sites-enabled
 sudo mkdir -p /etc/nginx/ssl
 sudo mkdir -p /etc/nginx/ssl/cloudflare
 sudo mkdir -p /usr/lib/nginx/modules
@@ -152,14 +154,9 @@ sudo mkdir -p /var/lib/nginx/proxy
 sudo mkdir -p /var/log/domains
 sudo mkdir -p /var/www/admin/tools
 sudo mkdir -p /var/www/error
-sudo mkdir -p /etc/nginx/config-backups
 
 # Assign Nginx Log Permissions
 sudo chown -hR www-data:www-data /var/log/domains
-
-# Remove Nginx Default Virtual Host Dir Structure for Ubuntu
-# We use CentOS style because we like it better. Sue us.
-sudo rm -rf /etc/nginx/sites-enabled && sudo rm -rf /etc/nginx/sites-available
 
 # Custom Error Pages
 sudo rm -rf /var/www/error
@@ -169,8 +166,8 @@ sudo git clone https://github.com/alexphelps/server-error-pages.git /var/www/err
 echo ""
 echo ""
 echo "Backing up existing nginx.conf. Backups can be found in /etc/nginx/config-backups"
-sudo cp -r /etc/nginx/nginx.conf /etc/nginx/config-backups/
-sudo cp -r /etc/nginx/globals /etc/nginx/config-backups/
+sudo cp -r /etc/nginx/nginx.conf /home/EngineScript/user-data/config-backups/nginx/
+sudo cp -r /etc/nginx/globals /home/EngineScript/user-data/config-backups/nginx/
 sleep 3
 
 # Retrieve EngineScript Nginx .conf Files

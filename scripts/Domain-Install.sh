@@ -49,7 +49,7 @@ echo ""
 echo ""
 
 # Create Domain Vhost File
-sudo cat <<EOT > /etc/nginx/conf.d/vhost/${DOMAIN}.conf
+sudo cat <<EOT > /etc/nginx/sites-enabled/${DOMAIN}.conf
 # VisiStruct's LEMP WordPress Server Config
 # https://github.com/VisiStruct/LEMP-Server-Xenial-16.04
 # https://VisiStruct.com - Orlando Web Design and Maintenance
@@ -226,7 +226,7 @@ echo "Paste your Origin Certificate:"
 IFS= read -d '' -n 1 ORIGIN_CERT
 while IFS= read -d '' -n 1 -t 2 c
   do
-    keyvariable+=$c
+    ORIGIN_CERT+=$c
   done
 
 # Create Origin Certificate
@@ -239,6 +239,13 @@ echo ""
 
 # Private Key User Input
 echo "Copy the entire Private Key, then paste it into the input below."
+echo "Be sure to include the entire script, including the BEGIN and END portions."
+echo ""
+echo  "Example:"
+echo "-----BEGIN PRIVATE KEY-----"
+echo "and"
+echo "-----END PRIVATE KEY-----"
+echo ""
 echo "Paste is usually done within an SSH client using either CTRL+SHIFT+V or right click."
 echo "Input will close 2 seconds after paste."
 echo ""
@@ -246,7 +253,7 @@ echo "Paste your Private Key:"
 IFS= read -d '' -n 1 PRIVATE_KEY
 while IFS= read -d '' -n 1 -t 2 c
   do
-    keyvariable+=$c
+    PRIVATE_KEY+=$c
   done
 
 # Create Private Key
@@ -299,9 +306,9 @@ DBPASSS="ES${RANDOM}WP${DT}@%&${RAND_CHAR}"
 # Domain Database Credentials
 source /home/EngineScript/user-data/mysql-credentials/mysqlrp.txt
 source /home/EngineScript/user-data/mysql-credentials/${DOMAIN}.txt
-echo "WPDB=${DBS}" >> /home/EngineScript/user-data/mysql-credentials/${DOMAIN}
-echo "WPUSER=${DBUSERS}" >> /home/EngineScript/user-data/mysql-credentials/${DOMAIN}
-echo "WPPASS=${DBPASSS}" >> /home/EngineScript/user-data/mysql-credentials/${DOMAIN}
+echo "WPDB=${DBS}" >> /home/EngineScript/user-data/mysql-credentials/${DOMAIN}.txt
+echo "WPUSER=${DBUSERS}" >> /home/EngineScript/user-data/mysql-credentials/${DOMAIN}.txt
+echo "WPPASS=${DBPASSS}" >> /home/EngineScript/user-data/mysql-credentials/${DOMAIN}.txt
 echo ""
 echo "Randomly generated MySQL database credentials for ${DOMAIN}."
 echo "Database: ${WPDB}"

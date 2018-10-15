@@ -58,27 +58,31 @@ echo ""
 echo ""
 sleep 5
 
-# Update server and install dependencies
+# Add Repositories
 sudo add-apt-repository -y ppa:ubuntu-toolchain-r/ppa
-sudo apt update
-sudo apt upgrade -y
-sudo apt dist-upgrade -y
-sudo apt install autotools-dev bc build-essential ccache checkinstall curl debhelper dh-systemd dos2unix gcc git htop imagemagick libatomic-ops-dev libbsd-dev libbz2-1.0 libbz2-dev libbz2-ocaml libbz2-ocaml-dev libcurl4-openssl-dev libexpat-dev libgd-dev libgeoip-dev libgmp-dev libgoogle-perftools-dev libjemalloc1 libjemalloc-dev libluajit-5.1-common libluajit-5.1-dev libmhash-dev libpam0g-dev libpcre3 libpcre3-dev libperl-dev libreadline-dev libssl-dev libtool libxml2 libxml2-dev libxslt1-dev make nano openssl perl pigz po-debconf pwgen python-pip ruby-dev software-properties-common sudo tar tree unzip webp wget zip zlib1g zlib1g-dbg zlib1g-dev zlibc -y
-
-# Remove stuff we don't want
-sudo apt remove --purge mysql-server mysql-client mysql-common apache2* php5* nginx nginx-extras -y
-sudo apt autoremove -y
-sudo apt autoclean -y
-sudo rm -rf /var/lib/mysql
-
-# GCC
+sudo add-apt-repository -y ppa:maxmind/ppa
 sudo add-apt-repository -y ppa:jonathonf/gcc-8.1
 sudo add-apt-repository -y ppa:jonathonf/gcc
+sudo add-apt-repository "deb http://archive.canonical.com/ubuntu ${UBUNTU_VER} partner"
+
+# Update server and install dependencies
 sudo apt update
 sudo apt upgrade -y
 sudo apt dist-upgrade -y
-sudo apt install gcc-8 g++-8 -y
+sudo apt remove --purge mysql-server mysql-client mysql-common apache2* php5* nginx nginx-extras -y
+sudo rm -rf /var/lib/mysql
+sudo apt install autotools-dev axel bash-completion bc build-essential ccache checkinstall curl debhelper dh-systemd dos2unix gcc gcc-8 git glances g++-8 htop imagemagick libatomic-ops-dev libbsd-dev libbz2-1.0 libbz2-dev libbz2-ocaml libbz2-ocaml-dev libcurl4-openssl-dev libexpat-dev libgd-dev libgeoip-dev libgmp-dev libgoogle-perftools-dev libjemalloc-dev libjemalloc1 libluajit-5.1-common libluajit-5.1-dev libmcrypt-dev libmcrypt4 libmhash-dev libpam0g-dev libpcre3 libpcre3-dev libperl-dev libreadline-dev libssl-dev libtidy-0.99-0 libtidy-dev libtool libxml2 libxml2-dev libxslt1-dev make mcrypt mlocate nano openssl perl pigz po-debconf pwgen python-jinja2 python-markupsafe python-pip python-psutil re2c ruby-dev software-properties-common sudo tar tree unzip webp wget zip zlib1g zlib1g-dbg zlib1g-dev zlibc -y
+
+# Cleanup
+sudo apt autoremove -y
+sudo apt autoclean -y
+
+# GCC
 sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-8 80 --slave /usr/bin/g++ g++ /usr/bin/g++-8
+
+# Jemalloc
+touch /etc/ld.so.preload
+echo "/usr/lib/x86_64-linux-gnu/libjemalloc.so" | sudo tee --append /etc/ld.so.preload
 
 # PCRE
 cd /usr/src
@@ -100,9 +104,15 @@ sudo make install
 mv -v /usr/lib/libpcre.so.* /lib
 ln -sfv ../../lib/$(readlink /usr/lib/libpcre.so) /usr/lib/libpcre.so
 
-# Jemalloc
-touch /etc/ld.so.preload
-echo "/usr/lib/x86_64-linux-gnu/libjemalloc.so" | sudo tee --append /etc/ld.so.preload
+# Cloudflare zlib Fork
+sudo rm -rf /usr/src/zlib-cf
+cd /usr/src
+sudo git clone https://github.com/cloudflare/zlib.git -b gcc.amd64 zlib-cf
+cd zlib-cf
+sudo make -f Makefile.in distclean
+./configure --prefix=/usr/local/zlib-cf
+sudo make
+sudo make install
 
 # EngineScript Git Clone
 sudo rm -rf /usr/lib/EngineScript

@@ -34,14 +34,6 @@ sudo wget https://github.com/nginx-modules/ngx_cache_purge/archive/${NGINX_PURGE
 sudo wget https://www.openssl.org/source/openssl-${OPENSSL_VER}.tar.gz && sudo tar -xzf openssl-${OPENSSL_VER}.tar.gz
 sudo wget https://www.zlib.net/zlib-${ZLIB_VER}.tar.gz && sudo tar xzvf zlib-${ZLIB_VER}.tar.gz
 
-# Cloudflare zlib Fork
-# Change Nginx compile command from zlib-cf if you want official release. It's already downloaded in /usr/src
-sudo rm -rf /usr/src/zlib-cf
-sudo git clone https://github.com/cloudflare/zlib.git -b gcc.amd64 zlib-cf
-cd /usr/src/zlib-cf
-sudo make -f Makefile.in distclean
-sudo make install
-
 # Brotli
 sudo rm -rf /usr/src/ngx_brotli
 cd /usr/src
@@ -102,7 +94,6 @@ sudo ./configure \
   --with-libatomic \
   --with-openssl=/usr/src/openssl-${OPENSSL_VER} \
   --with-openssl-opt='enable-ec_nistp_64_gcc_128 enable-tls1_3 no-nextprotoneg no-psk no-srp no-ssl2 no-ssl3 no-weak-ssl-ciphers zlib -ljemalloc -march=native -Wl,-flto' \
-  --with-pcre=/usr/src/pcre-${PCRE_VER} \
   --with-pcre-jit \
   --with-zlib=/usr/src/zlib-cf
 
@@ -187,7 +178,7 @@ sudo wget https://raw.githubusercontent.com/VisiStruct/EngineScript/master/nginx
 sudo wget https://raw.githubusercontent.com/VisiStruct/EngineScript/master/nginx/globals/fileheaders.conf -O /etc/nginx/globals/fileheaders.conf
 sudo wget https://raw.githubusercontent.com/VisiStruct/EngineScript/master/nginx/globals/phpwpcommon.conf -O /etc/nginx/globals/phpwpcommon.conf
 sudo wget https://raw.githubusercontent.com/VisiStruct/EngineScript/master/nginx/globals/wpsecurity.conf -O /etc/nginx/globals/wpsecurity.conf
-sudo wget https://raw.githubusercontent.com/VisiStruct/EngineScript/master/misc/logrotate.d/nginx -O /etc/logrotate.d/nginx
+sudo wget https://raw.githubusercontent.com/VisiStruct/EngineScript/master/logrotate/nginx -O /etc/logrotate.d/nginx
 
 # Cloudflare
 # Run Cloudflare Script and Write .conf File

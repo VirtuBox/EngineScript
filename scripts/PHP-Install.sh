@@ -32,13 +32,12 @@ sudo add-apt-repository -y ppa:ondrej/php
 # Install PHP
 sudo apt update && sudo apt upgrade -y
 sudo apt install php7.2 php7.2-bcmath php7.2-cli php7.2-common php7.2-curl php7.2-fpm php7.2-gd php-geoip php-imagick php7.2-intl php7.2-json php7.2-mbstring php7.2-mysql php7.2-opcache php-pear php7.2-readline php7.2-soap php7.2-tidy php7.2-xml php7.2-xmlrpc php7.2-xsl php7.2-zip -y
-sudo mkdir -p /etc/php/7.2/fpm/config-backups
 
 # Backup existing php.ini
 echo ""
 echo ""
 echo "Backing up existing php.ini. Backup can be found in /etc/php/7.2/fpm/config-backups"
-sudo cp /etc/php/7.2/fpm/php.ini /etc/php/7.2/fpm/config-backups
+sudo cp -r /etc/php/7.2/fpm/php.ini /home/EngineScript/user-data/config-backups/php/
 sleep 3
 
 # Retreive EngineScript php.ini

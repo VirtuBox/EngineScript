@@ -63,7 +63,7 @@ sudo add-apt-repository -y ppa:ubuntu-toolchain-r/ppa
 sudo apt update
 sudo apt upgrade -y
 sudo apt dist-upgrade -y
-sudo apt install autotools-dev bc build-essential checkinstall ccache curl debhelper dh-systemd dos2unix gcc git htop imagemagick libatomic-ops-dev libbz2-dev libcurl4-openssl-dev libexpat-dev libgd-dev libgeoip-dev libgmp-dev libgoogle-perftools-dev libluajit-5.1-common libluajit-5.1-dev libmhash-dev libpam0g-dev libpcre3 libpcre3-dev libperl-dev libreadline-dev libssl-dev libxml2 libxml2-dev libxslt1-dev make nano openssl perl po-debconf pwgen python-pip ruby-dev software-properties-common sudo tar unzip webp wget zip zlibc zlib1g zlib1g-dbg zlib1g-dev -y
+sudo apt install autotools-dev bc build-essential ccache checkinstall curl debhelper dh-systemd dos2unix gcc git htop imagemagick libatomic-ops-dev libbsd-dev libbz2-1.0 libbz2-dev libbz2-ocaml libbz2-ocaml-dev libcurl4-openssl-dev libexpat-dev libgd-dev libgeoip-dev libgmp-dev libgoogle-perftools-dev libjemalloc1 libjemalloc-dev libluajit-5.1-common libluajit-5.1-dev libmhash-dev libpam0g-dev libpcre3 libpcre3-dev libperl-dev libreadline-dev libssl-dev libtool libxml2 libxml2-dev libxslt1-dev make nano openssl perl pigz po-debconf pwgen python-pip ruby-dev software-properties-common sudo tar tree unzip webp wget zip zlib1g zlib1g-dbg zlib1g-dev zlibc -y
 
 # Remove stuff we don't want
 sudo apt remove --purge mysql-server mysql-client mysql-common apache2* php5* nginx nginx-extras -y
@@ -101,7 +101,6 @@ mv -v /usr/lib/libpcre.so.* /lib
 ln -sfv ../../lib/$(readlink /usr/lib/libpcre.so) /usr/lib/libpcre.so
 
 # Jemalloc
-sudo apt install libjemalloc1 libjemalloc-dev
 touch /etc/ld.so.preload
 echo "/usr/lib/x86_64-linux-gnu/libjemalloc.so" | sudo tee --append /etc/ld.so.preload
 

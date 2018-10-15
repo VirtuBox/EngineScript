@@ -85,6 +85,7 @@ sudo ./configure \
   --without-mail_imap_module \
   --without-mail_pop3_module \
   --without-mail_smtp_module \
+  --with-file-aio \
   --with-http_gunzip_module \
   --with-http_gzip_static_module \
   --with-http_realip_module \
@@ -95,6 +96,7 @@ sudo ./configure \
   --with-openssl=/usr/src/openssl-${OPENSSL_VER} \
   --with-openssl-opt='enable-ec_nistp_64_gcc_128 enable-tls1_3 no-nextprotoneg no-psk no-srp no-ssl2 no-ssl3 no-weak-ssl-ciphers zlib -ljemalloc -march=native -Wl,-flto' \
   --with-pcre-jit \
+  --with-threads \
   --with-zlib=/usr/src/zlib-cf
 
 sudo make -j ${CPU_COUNT}

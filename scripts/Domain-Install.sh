@@ -59,6 +59,7 @@ echo ""
 echo ""
 
 # SSL Certificate Input
+clear
 echo "Cloudflare SSL Certificate"
 echo "----------------------------------------------------------------"
 echo "You'll need to generate the certificate for your domain from within Cloudflare's control panel."
@@ -76,6 +77,7 @@ echo ""
 echo ""
 
 # Origin Certificate User Input
+clear
 echo "----------------------------------------------------------------"
 echo "Copy the entire Origin Certificate, then paste it into the input below."
 echo "Be sure to include the entire script, including the BEGIN and END portions."
@@ -108,6 +110,7 @@ echo "Origin Certificate set"
 echo ""
 
 # Private Key User Input
+clear
 echo "Copy the entire Private Key, then paste it into the input below."
 echo ""
 echo "Paste is usually done within an SSH client using either CTRL+SHIFT+V or right click."
@@ -129,6 +132,7 @@ echo ""
 sleep 3
 
 # Final Cloudflare SSL Steps
+clear
 echo ""
 echo ""
 echo "Click the OK button to leave the Create Certificate window."
@@ -177,7 +181,6 @@ echo "Password: ${PSWD}"
 echo "URL:      ${SITE_URL}"
 echo "SQL Root: ${MYSQL_RP}"
 echo ""
-echo "These database credentials have also been backed up to /home/EngineScript/user-data/mysql-credentials/${SITE_URL}.txt"
 sleep 5
 sudo mysql -u root -p$MYSQL_RP -e "CREATE DATABASE ${DB};"
 sudo mysql -u root -p$MYSQL_RP -e "CREATE USER ${USER}@'localhost' IDENTIFIED BY '${PSWD}';"
@@ -221,6 +224,7 @@ sudo cp -r /etc/nginx/ssl/${SITE_URL} /home/EngineScript/user-data/ssl-backups/
 sudo cp -r /var/www/${SITE_URL}/html/wp-config.php /home/EngineScript/user-data/site-backups/${SITE_URL}/
 
 # Backups notice
+clear
 echo "-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-"
 echo "|   Backups:                                           |"
 echo "-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-"

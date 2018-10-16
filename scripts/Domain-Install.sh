@@ -161,7 +161,6 @@ while true;
   done
 
 # Domain Creation Variables
-WP_SALT=$(curl -L https://api.wordpress.org/secret-key/1.1/salt/)
 SDB="ESwp${RAND_CHAR2}"
 SUSR="ESwp${RANDOM}${RANDOM}"
 SPS="ESwp${RAND_CHAR2}${RAND_CHAR}${DT}"
@@ -198,7 +197,7 @@ sudo mkdir -p /var/www/${SITE_URL}/html/wp-content/uploads
 # Create wp-config.php
 sudo wget -O /var/www/${SITE_URL}/html/wp-config.php https://raw.githubusercontent.com/VisiStruct/EngineScript/master/misc/wp/wp-config.php
 sudo sed -i "s|SEDWPDB|${DB}|g" /var/www/${SITE_URL}/html/wp-config.php
-sudo sed -i "s|SEDSALT|${WP_SALT}|g" /var/www/${SITE_URL}/html/wp-config.php
+sudo sed -i "s|SEDSALT|${SALT}|g" /var/www/${SITE_URL}/html/wp-config.php
 sudo sed -i "s|SEDWPUSER|${USER}|g" /var/www/${SITE_URL}/html/wp-config.php
 sudo sed -i "s|SEDWPPASS|${PSWD}|g" /var/www/${SITE_URL}/html/wp-config.php
 sudo sed -i "s|SEDPREFIX|${PREFIX}|g" /var/www/${SITE_URL}/html/wp-config.php
@@ -211,7 +210,7 @@ sudo chown -hR www-data:www-data /var/www/${SITE_URL}/html/
 
 # Create Domain Vhost File
 sudo wget -O /etc/nginx/sites-enabled/${SITE_URL}.conf https://raw.githubusercontent.com/VisiStruct/EngineScript/master/nginx/sites-enabled/yourdomain.com.conf
-sudo sed -i "s|yourdomain.com|$SITE_URL|g" /etc/nginx/sites-enabled/${SITE_URL}.conf
+sudo sed -i "s|yourdomain.com|${SITE_URL}|g" /etc/nginx/sites-enabled/${SITE_URL}.conf
 
 # Backup Dir Creation
 sudo mkdir -p /home/EngineScript/user-data/config-backups/nginx/${SITE_URL}
@@ -265,7 +264,6 @@ echo ""
 echo "============================================================="
 echo ""
 sleep 5
-
 
 # Cleanup
 cd /usr/src

@@ -83,13 +83,27 @@ echo "Copy the entire Origin Certificate, then paste it into the input below."
 echo "Be sure to include the entire script, including the BEGIN and END portions."
 echo ""
 echo  "Example:"
-echo "-----BEGIN PRIVATE KEY-----"
-echo "MIGHAgEAMBMGByqGSM49AgEGCCqgsM49AwEHBG0wawIBAQQgmO3MVO22TVWEdtfe"
-echo "gjB+XbAknyDdwLhghL4GyBx9GTGhRANCAAQgC/LadElQyBWbysrjxa5AGL+KE/uf"
-echo "MIGHAgEAMBMGByqGSM49AgEGCCqgsM49AwEHBG0wawIBAQQgmO3MVO22TVWEdtfe"
-echo "gjB+XbAknyDdwLhghL4GyBx9GTGhRANCAAQgC/LadElQyBWbysrjxa5AGL+KE/uf"
-echo "tIdf041YNreM35PLuYB3i8zgJNm99Tzx3ClhZ58FLdEWV+S2cfOsyGTt"
-echo "-----END PRIVATE KEY-----"
+echo "
+-----BEGIN CERTIFICATE-----
+MIIDLTCCAtKgAwIBAgIUW5cWYntbJ7+P71lMCaRBAdms0uswCgYIKoZIzj0EAwIw
+gY8xCzAJBgNVBAYTAlVTMRMwEQYDVQQIEwpDYWxpZm9ybmlhMRYwFAYDVQQHEw1T
+YW4gRnJhbmNpc2NvMRkwFwYDVQQKExBDbG91ZEZsYXJlLCBJbmMuMTgwNgYDVQQL
+Ey9DbG91ZEZsYXJlIE9yaWdpbiBTU0wgRUNDIENlcnRpZmljYXRlIEF1dGhvcml0
+eTAeFw0xODEwMTQwNjAwMDBaFw0zMzEwMTAwNjAwMDBaMGIxGTAXBgNVBAoTEENs
+b3VkRmxhcmUsIEluYy4xHTAbBgNVBAsTFENsb3VkRmxhcmUgT3JpZ2luIENBMSYw
+JAYDVQQDEx1DbG91ZEZsYXJlIE9yaWdpbiBDZXJ0aWZpY2F0ZTBZMBMGByqGSM49
+AgEGCCqGSM49AwEHA0IABCAL8toNaVDIFZvKyuPFrkAYv4oT+5+0h1/TjVg2t4zf
+k8u5gHeLzOAk2b31PPHcKWFnnwUt0Ra/5LZx86zIZO2jggE2MIIBMjAOBgNVHQ8B
+Af8EBAMCBaAwHQYDVR0lBBYwFAYIKwYBBQUHAwIGCCsGAQUFBwMBMAwGA1UdEwEB
+/wQCMAAwHQYDVR0OBBYEFOYgNf/vNY2AWEPhXBWiZShfyX43MB8GA1UdIwQYMBaA
+FIUwXTsqcNTt1ZJnB/3rObQaDjinMEQGCCsGAQUFBwEBBDgwNjA0BggrBgEFBQcw
+AYYoaHR0cDovL29jc3AuY2xvdWRmbGFyZS5jb20vb3JpZ2luX2VjY19jYTAvBgNV
+HREEKDAmghIqLmVuZ2luZXNjcmlwdC5jb22CEGVuZ2luZXNjcmlwdC5jb20wPAYD
+VR0fBDUwMzAxoC+gLYYraHR0cDovL2NybC5jbG91ZGZsYXJlLmNvbS9vcmlnaW5f
+ZWNjX2NhLmNybDAKBggqhkjOPQQDAgNJADBGAiEA2wxm5NARdNd8wxriFEkX0l+3
+ywzgZyb9bCoCwKAdp0gCIQD3uEESW8g8uWph+JxalVrlm49BZ9DJiQM6R+J7bbJz
+sg==
+-----END CERTIFICATE-----"
 echo ""
 echo "Paste is usually done within an SSH client using either CTRL+SHIFT+V or right click."
 echo "When finished, do not press enter. Input will close 2 seconds after paste."
@@ -116,6 +130,15 @@ echo ""
 echo "Paste is usually done within an SSH client using either CTRL+SHIFT+V or right click."
 echo "When finished, do not press enter. Input will close 2 seconds after paste."
 echo ""
+echo "Example:
+
+-----BEGIN PRIVATE KEY-----
+MIGHAgEAMBMGByqGSM49AgEGCCqGSM49AwEHBG0wawIBAQQgmO3MVO22TVWEdtfe
+gjB+XbAknyDdwLrweL4GyBx9GTGhRANCAAQgC/LaDWlQyBWbysrjxa5AGL+KE/uf
+tIdf041YNreM35PLuYB3i8zgJNm99Tzx3ClhZ58FLdEWv+S2cfOsyGTt
+-----END PRIVATE KEY-----
+
+"
 echo "Paste your Private Key:"
 IFS= read -d '' -n 1 PRIVATE_KEY
 while IFS= read -d '' -n 1 -t 2 c
@@ -192,11 +215,15 @@ sudo mkdir -p /var/www/${SITE_URL}/html/wp-content/uploads
 # Create wp-config.php
 sudo wget -O /var/www/${SITE_URL}/html/wp-config.php https://raw.githubusercontent.com/VisiStruct/EngineScript/master/misc/wp/wp-config.php
 sudo sed -i "s|SEDWPDB|${DB}|g" /var/www/${SITE_URL}/html/wp-config.php
-sudo sed -i "s|SEDSALT|${WPSALT}|g" /var/www/${SITE_URL}/html/wp-config.php
 sudo sed -i "s|SEDWPUSER|${USER}|g" /var/www/${SITE_URL}/html/wp-config.php
 sudo sed -i "s|SEDWPPASS|${PSWD}|g" /var/www/${SITE_URL}/html/wp-config.php
 sudo sed -i "s|SEDPREFIX|${PREFIX}|g" /var/www/${SITE_URL}/html/wp-config.php
 sudo sed -i "s|SEDURL|${SITE_URL}|g" /var/www/${SITE_URL}/html/wp-config.php
+
+# WP Salt Creation
+SALT=$(curl -L https://api.wordpress.org/secret-key/1.1/salt/)
+STRING='put your unique phrase here'
+printf '%s\n' "g/$STRING/d" a "$SALT" . w | ed -s /var/www/${SITE_URL}/html/wp-config.php
 
 # WP File Permissions
 sudo find /var/www/${SITE_URL}/html/ -type d -exec chmod 755 {} \;

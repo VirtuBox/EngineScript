@@ -11,7 +11,14 @@ define('DB_COLLATE',	'');						// Don't change this if in doubt.
 /* Salt Keys
 * You can generate these using the https://api.wordpress.org/secret-key/1.1/salt/
 * You can change these at any point in time to invalidate all existing cookies. This will force all users to have to log in again.		 */
-SEDSALT
+define( 'AUTH_KEY',         'put your unique phrase here' );
+define( 'SECURE_AUTH_KEY',  'put your unique phrase here' );
+define( 'LOGGED_IN_KEY',    'put your unique phrase here' );
+define( 'NONCE_KEY',        'put your unique phrase here' );
+define( 'AUTH_SALT',        'put your unique phrase here' );
+define( 'SECURE_AUTH_SALT', 'put your unique phrase here' );
+define( 'LOGGED_IN_SALT',   'put your unique phrase here' );
+define( 'NONCE_SALT',       'put your unique phrase here' );
 
 /* MySQL database table prefix. */
 $table_prefix  = 'SEDPREFIX_';

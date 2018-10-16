@@ -12,7 +12,6 @@
 # License:     GPL v3.0
 # OS:          Ubuntu 16.04 Xenial & Ubuntu 18.04 Biotic
 #----------------------------------------------------------------------------
-RAND_CHAR2="$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 10 | head -n 1)"
 
 # Variables
 source /usr/lib/EngineScript/misc/variables/variables
@@ -20,7 +19,7 @@ source /usr/lib/EngineScript/misc/variables/variables
 # Check current users ID. If user is not 0 (root), exit.
 if [ "${EUID}" != 0 ];
   then
-    echo "ServerAdmin NGINX Auto-Installer should be executed as the root user."
+    echo "EngineScript should be executed as the root user."
     exit
 fi
 
@@ -29,8 +28,15 @@ fi
 
 # Intro Warning
 echo ""
-echo "    Read the questions carefully and enter the proper response to each question."
+echo "-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-"
+echo "|   Domain Creation                                   |"
+echo "-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-"
 echo ""
+echo "Read the questions carefully and enter the proper response to each question."
+echo ""
+echo ""
+echo "WARNING: Do not run this script on a site that already exists."
+echo "If you do, things will break."
 echo ""
 echo ""
 sleep 5
@@ -51,13 +57,6 @@ echo ""
 echo ""
 echo ""
 echo ""
-
-# Create Domain Vhost File
-sudo wget -O /etc/nginx/sites-enabled/${DOMAIN}.conf https://raw.githubusercontent.com/VisiStruct/EngineScript/master/nginx/sites-enabled/yourdomain.com.conf
-sed -i "s|yourdomain.com|$DOMAIN|g" /etc/nginx/sites-enabled/${DOMAIN}.conf
-
-sudo mkdir -p /home/EngineScript/user-data/config-backups/nginx/${DOMAIN}
-sudo cp -r /etc/nginx/conf.d/vhost/${DOMAIN}.conf /home/EngineScript/user-data/config-backups/nginx/${DOMAIN}/
 
 # SSL Certificate Input
 echo "Cloudflare SSL Certificate"
@@ -85,11 +84,13 @@ echo  "Example:"
 echo "-----BEGIN PRIVATE KEY-----"
 echo "MIGHAgEAMBMGByqGSM49AgEGCCqgsM49AwEHBG0wawIBAQQgmO3MVO22TVWEdtfe"
 echo "gjB+XbAknyDdwLhghL4GyBx9GTGhRANCAAQgC/LadElQyBWbysrjxa5AGL+KE/uf"
+echo "MIGHAgEAMBMGByqGSM49AgEGCCqgsM49AwEHBG0wawIBAQQgmO3MVO22TVWEdtfe"
+echo "gjB+XbAknyDdwLhghL4GyBx9GTGhRANCAAQgC/LadElQyBWbysrjxa5AGL+KE/uf"
 echo "tIdf041YNreM35PLuYB3i8zgJNm99Tzx3ClhZ58FLdEWV+S2cfOsyGTt"
 echo "-----END PRIVATE KEY-----"
 echo ""
 echo "Paste is usually done within an SSH client using either CTRL+SHIFT+V or right click."
-echo "Input will close 2 seconds after paste."
+echo "When finished, do not press enter. Input will close 2 seconds after paste."
 echo ""
 echo "Paste your Origin Certificate:"
 IFS= read -d '' -n 1 ORIGIN_CERT
@@ -103,14 +104,14 @@ sudo mkdir -p /etc/nginx/ssl/${DOMAIN}
 sudo cat <<EOT >> /etc/nginx/ssl/${DOMAIN}/${DOMAIN}.ocrt.pem
 ${ORIGIN_CERT}
 EOT
-echo "Thanks! Origin Certificate set"
+echo "Origin Certificate set"
 echo ""
 
 # Private Key User Input
 echo "Copy the entire Private Key, then paste it into the input below."
 echo ""
 echo "Paste is usually done within an SSH client using either CTRL+SHIFT+V or right click."
-echo "Input will close 2 seconds after paste."
+echo "When finished, do not press enter. Input will close 2 seconds after paste."
 echo ""
 echo "Paste your Private Key:"
 IFS= read -d '' -n 1 PRIVATE_KEY
@@ -123,10 +124,8 @@ while IFS= read -d '' -n 1 -t 2 c
 sudo cat <<EOT >> /etc/nginx/ssl/${DOMAIN}/${DOMAIN}.pkey.pem
 ${PRIVATE_KEY}
 EOT
-echo "Thanks! Private Key set"
+echo "Private Key set"
 echo ""
-sudo cp -r /etc/nginx/ssl/${DOMAIN} /home/EngineScript/user-data/ssl-backups/
-echo "Origin Certificate and Private Key have also been backed up to /home/EngineScript/user-data/ssl-backups/${DOMAIN}"
 sleep 3
 
 # Final Cloudflare SSL Steps
@@ -157,8 +156,6 @@ while true;
       esac
   done
 
-# Download Wordpress
-
 # Domain Creation Variables
 WP_SALT=$(curl -L https://api.wordpress.org/secret-key/1.1/salt/)
 SDB="ESwp${RAND_CHAR2}"
@@ -170,7 +167,7 @@ echo "DB=${SDB}" >> /home/EngineScript/user-data/mysql-credentials/${DOMAIN}.txt
 echo "USER=${SUSR}" >> /home/EngineScript/user-data/mysql-credentials/${DOMAIN}.txt
 echo "PSWD=${SPS}" >> /home/EngineScript/user-data/mysql-credentials/${DOMAIN}.txt
 echo ""
-clear
+
 source /home/EngineScript/user-data/mysql-credentials/mysqlrp.txt
 source /home/EngineScript/user-data/mysql-credentials/${DOMAIN}.txt
 echo "Randomly generated MySQL database credentials for ${SITE_URL}."
@@ -197,32 +194,63 @@ sudo mkdir -p /var/www/${SITE_URL}/html/wp-content/uploads
 
 # Create wp-config.php
 sudo wget -O /var/www/${SITE_URL}/html/wp-config.php https://raw.githubusercontent.com/VisiStruct/EngineScript/master/misc/wp/wp-config.php
-sed -i "s|SEDWPDB|${DB}|g" /var/www/${SITE_URL}/html/wp-config.php
-sed -i "s|SEDSALT|${WP_SALT}|g" /var/www/${SITE_URL}/html/wp-config.php
-sed -i "s|SEDWPUSER|${USER}|g" /var/www/${SITE_URL}/html/wp-config.php
-sed -i "s|SEDWPPASS|${PSWD}|g" /var/www/${SITE_URL}/html/wp-config.php
-sed -i "s|PREFIX|${PREFIX}|g" /var/www/${SITE_URL}/html/wp-config.php
-sed -i "s|yourdomain.com|${SITE_URL}|g" /var/www/${SITE_URL}/html/wp-config.php
+sudo sed -i "s|SEDWPDB|${DB}|g" /var/www/${SITE_URL}/html/wp-config.php
+sudo sed -i "s|SEDSALT|${WP_SALT}|g" /var/www/${SITE_URL}/html/wp-config.php
+sudo sed -i "s|SEDWPUSER|${USER}|g" /var/www/${SITE_URL}/html/wp-config.php
+sudo sed -i "s|SEDWPPASS|${PSWD}|g" /var/www/${SITE_URL}/html/wp-config.php
+sudo sed -i "s|SEDPREFIX|${PREFIX}|g" /var/www/${SITE_URL}/html/wp-config.php
+sudo sed -i "s|SEDURL|${SITE_URL}|g" /var/www/${SITE_URL}/html/wp-config.php
 
-sudo mkdir -p /home/EngineScript/user-data/site-backups/${SITE_URL}
-sudo cp -r /var/www/${SITE_URL}/html/wp-config.php /home/EngineScript/user-data/site-backups/${SITE_URL}/
-echo ""
-
-sudo cp -r /etc/nginx/ssl/${SITE_URL} /home/EngineScript/user-data/ssl-backups/
-echo "-==-==-==-==--==-==-==-==--==-==-==-==--==-==-==-==-"
-echo "|                  EngineScript                    |"
-echo "-==-==-==-==--==-==-==-==--==-==-==-==--==-==-==-==-"
-echo ""
-echo "Origin Certificate and Private Key have also been backed up to /home/EngineScript/user-data/ssl-backups/${SITE_URL}"
-echo ""
-echo "-==-==-==-==--==-==-==-==--==-==-==-==--==-==-==-==-"
-sleep 5
-
+# WP File Permissions
 sudo find /var/www/${SITE_URL}/html/ -type d -exec chmod 755 {} \;
 sudo find /var/www/${SITE_URL}/html/ -type f -exec chmod 644 {} \;
 sudo chown -hR www-data:www-data /var/www/${SITE_URL}/html/
 
-sudo service nginx restart && sudo service php-fpm72 restart
+# Create Domain Vhost File
+sudo wget -O /etc/nginx/sites-enabled/${SITE_URL}.conf https://raw.githubusercontent.com/VisiStruct/EngineScript/master/nginx/sites-enabled/yourdomain.com.conf
+sudo sed -i "s|yourdomain.com|$SITE_URL|g" /etc/nginx/sites-enabled/${SITE_URL}.conf
+
+# Backup Dir Creation
+sudo mkdir -p /home/EngineScript/user-data/config-backups/nginx/${SITE_URL}
+sudo mkdir -p /home/EngineScript/user-data/site-backups/${SITE_URL}
+
+
+# Create Backups
+sudo cp -r /etc/nginx/sites-enabled/${SITE_URL}.conf /home/EngineScript/user-data/config-backups/nginx/${SITE_URL}/
+sudo cp -r /etc/nginx/ssl/${SITE_URL} /home/EngineScript/user-data/ssl-backups/
+sudo cp -r /var/www/${SITE_URL}/html/wp-config.php /home/EngineScript/user-data/site-backups/${SITE_URL}/
+
+# Backups notice
+echo "-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-"
+echo "|   Backups:                                           |"
+echo "-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-"
+echo "For your records:"
+echo "----------------------"
+echo "Database: ${DB}"
+echo "User:     ${USER}"
+echo "Password: ${PSWD}"
+echo "URL:      ${SITE_URL}"
+echo "SQL Root: ${MYSQL_RP}"
+echo ""
+echo "-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-=="
+echo ""
+echo "Origin Certificate and Private Key have been backed up to:"
+echo "/home/EngineScript/user-data/ssl-backups/${SITE_URL}"
+echo "-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-=="
+echo ""
+echo "Domain Vhost .conf file backed up to:"
+echo "/home/EngineScript/user-data/config-backups/nginx/${SITE_URL}"
+echo "-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-=="
+echo ""
+echo "WordPress wp-config.php file backed up to:"
+echo "/home/EngineScript/user-data/site-backups/${SITE_URL}"
+echo "-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-=="
+echo ""
+sleep 5
+
+# Restart Services
+sudo service nginx restart && sudo service php7.2-fpm restart
+
 echo ""
 echo "============================================================="
 echo ""
@@ -232,15 +260,9 @@ echo "        Returning to main menu in 5 seconds."
 echo ""
 echo "============================================================="
 echo ""
-echo "Database: ${DB}"
-echo "User:     ${USER}"
-echo "Password: ${PSWD}"
-echo "URL:      ${SITE_URL}"
-echo "SQL Root: ${MYSQL_RP}"
-echo ""
 sleep 5
 
 
 # Cleanup
 cd /usr/src
-rm -rf *.tar.gz*
+sudo rm -rf *.tar.gz*

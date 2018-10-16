@@ -1,9 +1,9 @@
 <?php
 
 /* MySQL settings - You can get this info from your web host */
-define('DB_NAME',			'${WPDB}');
-define('DB_USER',			'${WPUSER}');
-define('DB_PASSWORD',	'${WPPASS}');
+define('DB_NAME',			'SEDWPDB');
+define('DB_USER',			'SEDWPUSER');
+define('DB_PASSWORD',	'SEDWPPASS');
 define('DB_CHARSET',	'utf8');				// Don't change this if in doubt.
 define('DB_HOST',			'localhost');		// Don't change this if in doubt.
 define('DB_COLLATE',	'');						// Don't change this if in doubt.
@@ -11,12 +11,12 @@ define('DB_COLLATE',	'');						// Don't change this if in doubt.
 /* Salt Keys
 * You can generate these using the https://api.wordpress.org/secret-key/1.1/salt/
 * You can change these at any point in time to invalidate all existing cookies. This will force all users to have to log in again.		 */
-${WP_SALT}
+WPSALT
 
 /* MySQL database table prefix. */
-$table_prefix  = 'mc_';
+$table_prefix  = 'PREFIX_';
 
-/*	EngineScript Server Settings	*/
+/* EngineScript Server Settings	*/
 
 /* SSL */
 define('FORCE_SSL_LOGIN', true);
@@ -63,7 +63,7 @@ define('WP_DEBUG_LOG', false);				// Located in /wp-content/debug.log
 define('WP_DEBUG_DISPLAY', false);		// Displays logs on site
 define('CONCATENATE_SCRIPTS', true);	// Setting to False may fix java issues in dashboard only
 define('SAVEQUERIES', false);					// https://codex.wordpress.org/Editing_wp-config.php#Save_queries_for_analysis
-//define('WP_ALLOW_REPAIR', true);		// http://${DOMAIN}/wp-admin/maint/repair.php  - Make sure to disable this once you're done. Anyone can trigger.
+//define('WP_ALLOW_REPAIR', true);		// http://yourdomain.com/wp-admin/maint/repair.php  - Make sure to disable this once you're done. Anyone can trigger.
 
 /* Absolute path to the WordPress directory. */
 if ( !defined('ABSPATH') )

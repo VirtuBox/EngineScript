@@ -174,13 +174,8 @@ echo ""
 source /home/EngineScript/user-data/mysql-credentials/mysqlrp.txt
 source /home/EngineScript/user-data/mysql-credentials/${DOMAIN}.txt
 echo "Randomly generated MySQL database credentials for ${SITE_URL}."
-echo "Database: ${DB}"
-echo "User:     ${USER}"
-echo "Password: ${PSWD}"
-echo "URL:      ${SITE_URL}"
-echo "SQL Root: ${MYSQL_RP}"
 echo ""
-sleep 5
+sleep 2
 sudo mysql -u root -p$MYSQL_RP -e "CREATE DATABASE ${DB};"
 sudo mysql -u root -p$MYSQL_RP -e "CREATE USER ${USER}@'localhost' IDENTIFIED BY '${PSWD}';"
 sudo mysql -u root -p$MYSQL_RP -e "GRANT index, select, insert, delete, update, create, drop, alter, create temporary tables, execute, lock tables, create view, show view, create routine, alter routine, trigger ON ${DB}.* TO ${USER}@'localhost'; FLUSH PRIVILEGES;"
@@ -197,7 +192,7 @@ sudo mkdir -p /var/www/${SITE_URL}/html/wp-content/uploads
 # Create wp-config.php
 sudo wget -O /var/www/${SITE_URL}/html/wp-config.php https://raw.githubusercontent.com/VisiStruct/EngineScript/master/misc/wp/wp-config.php
 sudo sed -i "s|SEDWPDB|${DB}|g" /var/www/${SITE_URL}/html/wp-config.php
-sudo sed -i "s|SEDSALT|${SALT}|g" /var/www/${SITE_URL}/html/wp-config.php
+sudo sed -i "s|SEDSALT|${WPSALT}|g" /var/www/${SITE_URL}/html/wp-config.php
 sudo sed -i "s|SEDWPUSER|${USER}|g" /var/www/${SITE_URL}/html/wp-config.php
 sudo sed -i "s|SEDWPPASS|${PSWD}|g" /var/www/${SITE_URL}/html/wp-config.php
 sudo sed -i "s|SEDPREFIX|${PREFIX}|g" /var/www/${SITE_URL}/html/wp-config.php
@@ -216,7 +211,6 @@ sudo sed -i "s|yourdomain.com|${SITE_URL}|g" /etc/nginx/sites-enabled/${SITE_URL
 sudo mkdir -p /home/EngineScript/user-data/config-backups/nginx/${SITE_URL}
 sudo mkdir -p /home/EngineScript/user-data/site-backups/${SITE_URL}
 
-
 # Create Backups
 sudo cp -r /etc/nginx/sites-enabled/${SITE_URL}.conf /home/EngineScript/user-data/config-backups/nginx/${SITE_URL}/
 sudo cp -r /etc/nginx/ssl/${SITE_URL} /home/EngineScript/user-data/ssl-backups/
@@ -228,12 +222,13 @@ echo "-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-"
 echo "|   Backups:                                           |"
 echo "-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-"
 echo "For your records:"
-echo "----------------------"
-echo "Database: ${DB}"
-echo "User:     ${USER}"
-echo "Password: ${PSWD}"
-echo "URL:      ${SITE_URL}"
-echo "SQL Root: ${MYSQL_RP}"
+echo "-------------------------------------------------------"
+echo "URL:                  ${SITE_URL}"
+echo "Database:             ${DB}"
+echo "User:                 ${USER}"
+echo "Password:             ${PSWD}"
+echo "MySQL Root User:      root"
+echo "MySQL Root Password:  ${MYSQL_RP}"
 echo ""
 echo "-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-=="
 echo ""
@@ -258,6 +253,9 @@ echo ""
 echo "============================================================="
 echo ""
 echo "        Domain setup completed."
+echo ""
+echo "        Your domain should be available now at:"
+echo "        https://${SITE_URL}"
 echo ""
 echo "        Returning to main menu in 5 seconds."
 echo ""

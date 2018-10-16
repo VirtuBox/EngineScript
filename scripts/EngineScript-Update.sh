@@ -43,7 +43,7 @@ echo "        Run again by typing enginescript in console."
 echo ""
 echo "============================================================="
 echo ""
-sleep 10
+sleep 5
 exit
 
 # Cleanup

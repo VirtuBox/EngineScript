@@ -14,6 +14,5 @@ PHP_VER="7.2"
 PREFIX="$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 2 | head -n 1)"
 RAND_CHAR="$(pwgen 9 1)"
 RAND_CHAR2="$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 12 | head -n 1)"
-WPSALT=$(curl -L https://api.wordpress.org/secret-key/1.1/salt/)
 UBUNTU_VER="$(lsb_release -sc)"
 ZLIB_VER="1.2.11"

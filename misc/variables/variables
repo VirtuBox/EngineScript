@@ -16,3 +16,7 @@ RAND_CHAR="$(pwgen 9 1)"
 RAND_CHAR2="$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 12 | head -n 1)"
 UBUNTU_VER="$(lsb_release -sc)"
 ZLIB_VER="1.2.11"
+
+# Shell text
+BOLD="$(tput bold)"
+NORMAL="$(tput sgr0)"

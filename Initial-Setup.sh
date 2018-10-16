@@ -32,7 +32,7 @@ ZLIB_VER="1.2.11"
 # Check current users ID. If user is not 0 (root), exit.
 if [ "${EUID}" != 0 ];
   then
-    echo "ServerAdmin NGINX Auto-Installer should be executed as the root user."
+    echo "EngineScript should be executed as the root user."
     exit
 fi
 

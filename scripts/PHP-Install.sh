@@ -41,7 +41,7 @@ sudo cp -r /etc/php/7.2/fpm/php.ini /home/EngineScript/user-data/config-backups/
 sleep 3
 
 # Retreive EngineScript php.ini
-sudo wget sudo wget https://raw.githubusercontent.com/VisiStruct/EngineScript/master/php/php.ini -O /etc/php/7.2/fpm
+echo "EngineScript should be executed as the root user."
 
 # Restart Nginx & PHP
 sudo service nginx restart

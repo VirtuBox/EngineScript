@@ -152,13 +152,13 @@ sudo wget https://raw.githubusercontent.com/VisiStruct/EngineScript/master/nginx
 # Retrieve Logrotate File
 sudo wget https://raw.githubusercontent.com/VisiStruct/EngineScript/master/misc/logrotate/nginx -O /etc/logrotate.d/nginx
 
+# Retrieve Cloudflare Origin Pull Cert
+sudo wget -O /etc/nginx/ssl/cloudflare/origin-pull-ca.pem https://support.cloudflare.com/hc/en-us/article_attachments/201243967/origin-pull-ca.pem
+
 # Cloudflare
 # Run Cloudflare Script and Write .conf File
 sudo chmod +x /usr/lib/EngineScript/misc/cron/cloudflare-nginx-ip-updater.sh
 sudo bash //usr/lib/EngineScript/misc/cron/cloudflare-nginx-ip-updater.sh
-
-# Retrieve Cloudflare Origin Pull Cert
-sudo wget -O /etc/nginx/ssl/cloudflare/origin-pull-ca.pem https://support.cloudflare.com/hc/en-us/article_attachments/201243967/origin-pull-ca.pem
 
 # Create Cloudflare Origin Pull Cert Monthly Cron
 sudo chmod +x /usr/lib/EngineScript/misc/cron/cfipopc.sh

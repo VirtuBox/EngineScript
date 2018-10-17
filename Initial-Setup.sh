@@ -106,8 +106,13 @@ sudo git clone https://github.com/cloudflare/zlib.git -b gcc.amd64 zlib-cf
 cd zlib-cf
 sudo make -f Makefile.in distclean
 ./configure --prefix=/usr/local/zlib-cf
-sudo make -j ${CPU_COUNT}
+sudo make
 sudo make install
+
+# Official zlib Download\
+# Just in-case the user wants to use this instead of zlib-cf
+cd /usr/src/
+sudo wget https://www.zlib.net/zlib-${ZLIB_VER}.tar.gz && sudo tar xzvf zlib-${ZLIB_VER}.tar.gz
 
 # Set Editor
 export EDITOR=/bin/nano

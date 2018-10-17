@@ -28,7 +28,6 @@ sudo wget https://nginx.org/download/nginx-${NGINX_VER}.tar.gz && sudo tar -xzvf
 sudo wget https://github.com/openresty/headers-more-nginx-module/archive/v${NGINX_HEADER_VER}.tar.gz && sudo tar -xzf v${NGINX_HEADER_VER}.tar.gz
 sudo wget https://github.com/nginx-modules/ngx_cache_purge/archive/${NGINX_PURGE_VER}.tar.gz && sudo tar -xzf ${NGINX_PURGE_VER}.tar.gz
 sudo wget https://www.openssl.org/source/openssl-${OPENSSL_VER}.tar.gz && sudo tar -xzf openssl-${OPENSSL_VER}.tar.gz
-sudo wget https://www.zlib.net/zlib-${ZLIB_VER}.tar.gz && sudo tar xzvf zlib-${ZLIB_VER}.tar.gz
 
 # Brotli
 sudo rm -rf /usr/src/ngx_brotli

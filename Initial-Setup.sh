@@ -59,7 +59,7 @@ sudo add-apt-repository -y ppa:ubuntu-toolchain-r/ppa
 sudo add-apt-repository -y ppa:maxmind/ppa
 sudo add-apt-repository -y ppa:jonathonf/gcc-8.1
 sudo add-apt-repository -y ppa:jonathonf/gcc
-sudo add-apt-repository "deb http://archive.canonical.com/ubuntu ${UBUNTU_VER} partner"
+#sudo add-apt-repository "deb http://archive.canonical.com/ubuntu ${UBUNTU_VER} partner"
 
 # Update server and install dependencies
 sudo apt update

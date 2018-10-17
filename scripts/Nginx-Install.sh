@@ -155,7 +155,7 @@ sudo wget https://raw.githubusercontent.com/VisiStruct/EngineScript/master/misc/
 # Cloudflare
 # Run Cloudflare Script and Write .conf File
 sudo wget https://raw.githubusercontent.com/VisiStruct/EngineScript/master/nginx/scripts/cloudflare-nginx-ip-updater.sh -P /etc/nginx/scripts
-sudo chmod x /etc/nginx/scripts/cloudflare-nginx-ip-updater.sh
+sudo chmod +x /etc/nginx/scripts/cloudflare-nginx-ip-updater.sh
 sudo bash /etc/nginx/scripts/cloudflare-nginx-ip-updater.sh
 
 # Retrieve Cloudflare Origin Pull Cert

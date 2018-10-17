@@ -192,7 +192,7 @@ SPS="ESwp${RAND_CHAR2}${RAND_CHAR}${DT}"
 
 # Domain Database Credentials
 echo "DB=${SDB}" >> /home/EngineScript/user-data/mysql-credentials/${DOMAIN}.txt
-echo "USER=${SUSR}" >> /home/EngineScript/user-data/mysql-credentials/${DOMAIN}.txt
+echo "USR=${SUSR}" >> /home/EngineScript/user-data/mysql-credentials/${DOMAIN}.txt
 echo "PSWD=${SPS}" >> /home/EngineScript/user-data/mysql-credentials/${DOMAIN}.txt
 echo ""
 
@@ -202,8 +202,8 @@ echo "Randomly generated MySQL database credentials for ${SITE_URL}."
 echo ""
 sleep 2
 sudo mysql -u root -p$MYSQL_RP -e "CREATE DATABASE ${DB};"
-sudo mysql -u root -p$MYSQL_RP -e "CREATE USER ${USER}@'localhost' IDENTIFIED BY '${PSWD}';"
-sudo mysql -u root -p$MYSQL_RP -e "GRANT index, select, insert, delete, update, create, drop, alter, create temporary tables, execute, lock tables, create view, show view, create routine, alter routine, trigger ON ${DB}.* TO ${USER}@'localhost'; FLUSH PRIVILEGES;"
+sudo mysql -u root -p$MYSQL_RP -e "CREATE USER ${USR}@'localhost' IDENTIFIED BY '${PSWD}';"
+sudo mysql -u root -p$MYSQL_RP -e "GRANT index, select, insert, delete, update, create, drop, alter, create temporary tables, execute, lock tables, create view, show view, create routine, alter routine, trigger ON ${DB}.* TO ${USR}@'localhost'; FLUSH PRIVILEGES;"
 
 sudo mkdir -p /var/www/${SITE_URL}/html
 cd /var/www/${SITE_URL}/html
@@ -217,7 +217,7 @@ sudo mkdir -p /var/www/${SITE_URL}/html/wp-content/uploads
 # Create wp-config.php
 sudo wget -O /var/www/${SITE_URL}/html/wp-config.php https://raw.githubusercontent.com/VisiStruct/EngineScript/master/misc/wp/wp-config.php
 sudo sed -i "s|SEDWPDB|${DB}|g" /var/www/${SITE_URL}/html/wp-config.php
-sudo sed -i "s|SEDWPUSER|${USER}|g" /var/www/${SITE_URL}/html/wp-config.php
+sudo sed -i "s|SEDWPUSER|${USR}|g" /var/www/${SITE_URL}/html/wp-config.php
 sudo sed -i "s|SEDWPPASS|${PSWD}|g" /var/www/${SITE_URL}/html/wp-config.php
 sudo sed -i "s|SEDPREFIX|${PREFIX}|g" /var/www/${SITE_URL}/html/wp-config.php
 sudo sed -i "s|SEDURL|${SITE_URL}|g" /var/www/${SITE_URL}/html/wp-config.php
@@ -247,32 +247,39 @@ sudo cp -r /var/www/${SITE_URL}/html/wp-config.php /home/EngineScript/user-data/
 
 # Backups notice
 clear
-echo "-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-"
-echo "|   Backups:                                           |"
-echo "-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-"
-echo "For your records:"
-echo "-------------------------------------------------------"
-echo "URL:                  ${SITE_URL}"
-echo "Database:             ${DB}"
-echo "User:                 ${USER}"
-echo "Password:             ${PSWD}"
-echo "MySQL Root User:      root"
-echo "MySQL Root Password:  ${MYSQL_RP}"
-echo ""
-echo "-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-=="
-echo ""
-echo "Origin Certificate and Private Key have been backed up to:"
-echo "/home/EngineScript/user-data/ssl-backups/${SITE_URL}"
-echo "-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-=="
-echo ""
-echo "Domain Vhost .conf file backed up to:"
-echo "/home/EngineScript/user-data/config-backups/nginx/${SITE_URL}"
-echo "-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-=="
-echo ""
-echo "WordPress wp-config.php file backed up to:"
-echo "/home/EngineScript/user-data/site-backups/${SITE_URL}"
-echo "-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-=="
-echo ""
+echo "
+-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-
+|   Backups:                                          |
+-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-
+For your records:
+-------------------------------------------------------
+URL:                  ${SITE_URL}
+Database:             ${DB}
+User:                 ${USR}
+Password:             ${PSWD}
+MySQL Root User:      root
+MySQL Root Password:  ${MYSQL_RP}
+
+-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-
+
+MySQL Root and Domain login credentials backed up to:
+/home/EngineScript/user-data/mysql-credentials/${SITE_URL}
+-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-
+
+
+Origin Certificate and Private Key have been backed up to:
+/home/EngineScript/user-data/ssl-backups/${SITE_URL}
+-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-
+
+Domain Vhost .conf file backed up to:
+/home/EngineScript/user-data/config-backups/nginx/${SITE_URL}
+-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-
+
+WordPress wp-config.php file backed up to:
+/home/EngineScript/user-data/site-backups/${SITE_URL}
+-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-
+
+"
 sleep 5
 
 # Restart Services

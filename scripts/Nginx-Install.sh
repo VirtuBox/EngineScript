@@ -160,14 +160,10 @@ sudo bash /etc/nginx/scripts/cloudflare-nginx-ip-updater.sh
 
 # Retrieve Cloudflare Origin Pull Cert
 sudo wget -O /etc/nginx/ssl/cloudflare/origin-pull-ca.pem https://support.cloudflare.com/hc/en-us/article_attachments/201243967/origin-pull-ca.pem
+sudo chmod +x /etc/cron.monthly/cfipopc.sh
 
 # Create Cron Jobs
-sudo cat > /etc/cron.monthly/cfipopc.sh <<EOF
-#!/usr/bin/env bash
-
-sudo wget -O /etc/nginx/ssl/cloudflare/origin-pull-ca.pem https://support.cloudflare.com/hc/en-us/article_attachments/201243967/origin-pull-ca.pem
-sudo bash /etc/nginx/scripts/cloudflare-nginx-ip-updater.sh
-EOF
+sudo wget https://raw.githubusercontent.com/VisiStruct/EngineScript/master/misc/cron/cfipopc.sh -O /etc/cron.monthly/cfipopc.sh
 
 # Cloudflare Origin Pull Certificate
 echo ""

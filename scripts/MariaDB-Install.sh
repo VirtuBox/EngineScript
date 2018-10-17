@@ -4,13 +4,9 @@
 #----------------------------------------------------------------------------
 # Website:     https://EngineScript.com
 # GitHub:      https://github.com/VisiStruct/EngineScript
-# Issues:      https://github.com/VisiStruct/EngineScript/issues
-#
 # Author:      VisiStruct
-# Hire Us:     https://VisiStruct.com
-# Based On:    https://github.com/VisiStruct/WordPress-LEMP-Server-Ubuntu
 # License:     GPL v3.0
-# OS:          Ubuntu 16.04 Xenial & Ubuntu 18.04 Biotic
+# OS:          Ubuntu 16.04 Xenial & Ubuntu 18.04 Bionic
 #----------------------------------------------------------------------------
 
 # Variables
@@ -35,7 +31,7 @@ if [ "${UBUNTU_VER}" = xenial ];
     sudo add-apt-repository -y 'deb [arch=amd64,i386,ppc64el] http://nyc2.mirrors.digitalocean.com/mariadb/repo/10.3/ubuntu xenial main'
 fi
 
-# MariaDB Biotic Repo
+# MariaDB Bionic Repo
 if [ "${UBUNTU_VER}" = bionic ];
   then
     sudo add-apt-repository -y 'deb [arch=amd64,i386,ppc64el] http://nyc2.mirrors.digitalocean.com/mariadb/repo/10.3/ubuntu bionic main'

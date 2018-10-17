@@ -2,14 +2,11 @@
 #----------------------------------------------------------------------------
 # EngineScript - High Performance LEMP WordPress Server Installation Tool
 #----------------------------------------------------------------------------
-# Author:      VisiStruct
-# Hire Us:     https://VisiStruct.com
 # Website:     https://EngineScript.com
 # GitHub:      https://github.com/VisiStruct/EngineScript
-# Issues:      https://github.com/VisiStruct/EngineScript/issues
-# Based On:    https://github.com/VisiStruct/WordPress-LEMP-Server-Ubuntu
+# Author:      VisiStruct
 # License:     GPL v3.0
-# OS:          Ubuntu 16.04 Xenial & Ubuntu 18.04 Biotic
+# OS:          Ubuntu 16.04 Xenial & Ubuntu 18.04 Bionic
 #----------------------------------------------------------------------------
 
 # Variables

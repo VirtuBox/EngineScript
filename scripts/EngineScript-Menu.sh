@@ -4,13 +4,9 @@
 #----------------------------------------------------------------------------
 # Website:     https://EngineScript.com
 # GitHub:      https://github.com/VisiStruct/EngineScript
-# Issues:      https://github.com/VisiStruct/EngineScript/issues
-#
 # Author:      VisiStruct
-# Hire Us:     https://VisiStruct.com
-# Based On:    https://github.com/VisiStruct/WordPress-LEMP-Server-Ubuntu
 # License:     GPL v3.0
-# OS:          Ubuntu 16.04 Xenial & Ubuntu 18.04 Biotic
+# OS:          Ubuntu 16.04 Xenial & Ubuntu 18.04 Bionic
 #----------------------------------------------------------------------------
 
 # Variables
@@ -45,7 +41,7 @@ while true
     echo "https://github.com/VisiStruct/WordPress-LEMP-Server-Ubuntu"
     echo ""
     echo "EngineScript Requires:"
-    echo "  - Ubuntu 16.04 Xenial or 18.04 Biotic"
+    echo "  - Ubuntu 16.04 Xenial or 18.04 Bionic"
     echo "  - Cloudflare"
     echo "  - 15 minutes of your time"
     echo ""

@@ -151,6 +151,7 @@ while IFS= read -d '' -n 1 -t 2 c
 sudo cat <<EOT >> /etc/nginx/ssl/${DOMAIN}/${DOMAIN}.pkey.pem
 ${PRIVATE_KEY}
 EOT
+echo ""
 echo "Private Key set"
 echo ""
 sleep 3

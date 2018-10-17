@@ -148,7 +148,9 @@ sudo wget https://raw.githubusercontent.com/VisiStruct/EngineScript/master/nginx
 sudo wget https://raw.githubusercontent.com/VisiStruct/EngineScript/master/nginx/globals/fileheaders.conf -O /etc/nginx/globals/fileheaders.conf
 sudo wget https://raw.githubusercontent.com/VisiStruct/EngineScript/master/nginx/globals/phpwpcommon.conf -O /etc/nginx/globals/phpwpcommon.conf
 sudo wget https://raw.githubusercontent.com/VisiStruct/EngineScript/master/nginx/globals/wpsecurity.conf -O /etc/nginx/globals/wpsecurity.conf
-sudo wget https://raw.githubusercontent.com/VisiStruct/EngineScript/master/logrotate/nginx -O /etc/logrotate.d/nginx
+
+# Retrieve Logrotate File
+sudo wget https://raw.githubusercontent.com/VisiStruct/EngineScript/master/misc/logrotate/nginx -O /etc/logrotate.d/nginx
 
 # Cloudflare
 # Run Cloudflare Script and Write .conf File

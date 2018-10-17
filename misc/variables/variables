@@ -2,7 +2,7 @@
 CPU_COUNT="$(nproc --all)"
 CURRENT_PATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 DT="$(date +"%m-%d-%y")"
-IP_ADDRESS="$(ip route get 8.8.8.8 | awk 'NR==1 {print $NF}')"
+IP_ADDRESS="$(ip -o route get to 8.8.8.8 | sed -n 's/.*src \([0-9.]\+\).*/\1/p')"
 MARIADB_VER="10.3"
 NGINX_HEADER_VER="0.33"
 NGINX_PURGE_VER="2.5"

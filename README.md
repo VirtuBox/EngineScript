@@ -1,4 +1,4 @@
-# **EngineScript - Automated WordPress LEMP Server**
+## **EngineScript - Automated WordPress LEMP Server**
 
 EngineScript automates the process of building a high-performance LEMP server.
 
@@ -10,7 +10,7 @@ If you'd like to test EngineScript for yourself, just enter the command below in
 
 **Install EngineScript**
 ```shell
-sudo curl -O https://raw.githubusercontent.com/VisiStruct/EngineScript/master/Initial-Setup.sh && chmod 0700 Initial-Setup.sh && sudo bash Initial-Setup.sh
+sudo curl -O https://raw.githubusercontent.com/VisiStruct/EngineScript/master/Initial-Setup.sh && sudo chmod 0700 Initial-Setup.sh && sudo bash Initial-Setup.sh
 ```
 
 ----------

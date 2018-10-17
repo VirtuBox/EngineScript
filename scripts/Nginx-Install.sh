@@ -107,36 +107,7 @@ sudo rm -rf /etc/nginx/*.default
 
 # Nginx Service Start Dance
 sudo rm -rf /lib/systemd/system/nginx.service
-sudo cat <<EOT >> /lib/systemd/system/nginx.service
-  # Stop dance for nginx
-  # =======================
-  #
-  # ExecStop sends SIGSTOP (graceful stop) to the nginx process.
-  # If, after 5s (--retry QUIT/5) nginx is still running, systemd takes control
-  # and sends SIGTERM (fast shutdown) to the main process.
-  # After another 5s (TimeoutStopSec=5), and if nginx is alive, systemd sends
-  # SIGKILL to all the remaining processes in the process group (KillMode=mixed).
-  #
-  # nginx signals reference doc:
-  # https://nginx.org/en/docs/control.html
-  #
-  [Unit]
-  Description=A high performance web server and a reverse proxy server
-  After=network.target
-
-  [Service]
-  Type=forking
-  PIDFile=/run/nginx.pid
-  ExecStartPre=/usr/sbin/nginx -t -q -g 'daemon on; master_process on;'
-  ExecStart=/usr/sbin/nginx -g 'daemon on; master_process on;'
-  ExecReload=/usr/sbin/nginx -g 'daemon on; master_process on;' -s reload
-  ExecStop=-/sbin/start-stop-daemon --quiet --stop --retry QUIT/5 --pidfile /var/run/nginx.pid
-  TimeoutStopSec=5
-  KillMode=mixed
-
-  [Install]
-  WantedBy=multi-user.target
-EOT
+sudo wget https://raw.githubusercontent.com/VisiStruct/EngineScript/master/misc/systemd/nginx.service -O /lib/systemd/system/nginx.service
 
 # Create Nginx Directories
 sudo mkdir -p /etc/nginx/conf.d

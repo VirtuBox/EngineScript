@@ -106,7 +106,7 @@ sudo git clone https://github.com/cloudflare/zlib.git -b gcc.amd64 zlib-cf
 cd zlib-cf
 sudo make -f Makefile.in distclean
 ./configure --prefix=/usr/local/zlib-cf
-sudo make
+sudo make -j ${CPU_COUNT}
 sudo make install
 
 # Set Editor

@@ -113,6 +113,9 @@ sudo make -f Makefile.in distclean
 sudo make
 sudo make install
 
+# Set Editor
+export VISUAL=nano
+
 # EngineScript Git Clone
 sudo rm -rf /usr/lib/EngineScript
 cd /usr/lib/

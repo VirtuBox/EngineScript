@@ -154,7 +154,6 @@ sudo wget https://raw.githubusercontent.com/VisiStruct/EngineScript/master/misc/
 
 # Cloudflare
 # Run Cloudflare Script and Write .conf File
-sudo wget https://raw.githubusercontent.com/VisiStruct/EngineScript/master/misc/cron/cloudflare-nginx-ip-updater.sh -P /etc/cron.monthly
 sudo chmod +x /etc/cron.monthly/cloudflare-nginx-ip-updater.sh
 sudo bash /etc/cron.monthly/cloudflare-nginx-ip-updater.sh
 
@@ -162,9 +161,11 @@ sudo bash /etc/cron.monthly/cloudflare-nginx-ip-updater.sh
 sudo wget -O /etc/nginx/ssl/cloudflare/origin-pull-ca.pem https://support.cloudflare.com/hc/en-us/article_attachments/201243967/origin-pull-ca.pem
 
 # Create Cloudflare Origin Pull Cert Monthly Cron
-sudo wget https://raw.githubusercontent.com/VisiStruct/EngineScript/master/misc/cron/cfipopc.sh -O /etc/cron.monthly/cfipopc.sh
 sudo chmod +x /etc/cron.monthly/cfipopc.sh
 sudo bash /etc/cron.monthly/cfipopc.sh
+
+# Copy Cron
+sudo cp /usr/lib/EngineScript/misc/cron/cloudflare-cron /etc/cron.d/cloudflare-cron
 
 # Cloudflare Origin Pull Certificate
 echo ""

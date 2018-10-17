@@ -54,6 +54,10 @@ echo ""
 echo ""
 sleep 5
 
+# Install server tools needed for script
+sudo apt update
+sudo apt-get install software-properties-common python-software-properties -y
+
 # Add Repositories
 sudo add-apt-repository -y ppa:ubuntu-toolchain-r/ppa
 sudo add-apt-repository -y ppa:maxmind/ppa

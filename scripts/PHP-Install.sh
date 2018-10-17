@@ -15,7 +15,7 @@ source /usr/lib/EngineScript/misc/variables/variables
 # Check current users ID. If user is not 0 (root), exit.
 if [ "${EUID}" != 0 ];
   then
-    echo "ServerAdmin NGINX Auto-Installer should be executed as the root user."
+    echo "EngineScript should be executed as the root user."
     exit
 fi
 #----------------------------------------------------------------------------
@@ -37,10 +37,9 @@ sudo cp -r /etc/php/7.2/fpm/php.ini /home/EngineScript/user-data/config-backups/
 sleep 3
 
 # Retreive EngineScript php.ini
-echo "EngineScript should be executed as the root user."
+sudo wget -O /etc/php/7.2/fpm/php.ini https://raw.githubusercontent.com/VisiStruct/EngineScript/master/php/php.ini
 
-# Restart Nginx & PHP
-sudo service nginx restart
+# Restart PHP
 sudo service php7.2-fpm restart
 
 echo ""

@@ -7,7 +7,10 @@
 # Author:        VisiStruct
 # License:       GPL v3.0
 # OS:            Ubuntu 16.04 Xenial & Ubuntu 18.04 Bionic
-# Suppport Us:   https://m.do.co/c/e57cc8492285
+#----------------------------------------------------------------------------
+# Buy a VPS from Digital Ocean:       https://m.do.co/c/e57cc8492285
+#
+#
 #----------------------------------------------------------------------------
 
 ## Variables

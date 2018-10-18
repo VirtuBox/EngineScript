@@ -18,9 +18,9 @@ source /usr/lib/EngineScript/misc/variables/variables
 
 # Check current users ID. If user is not 0 (root), exit.
 if [ "${EUID}" != 0 ];
-then
-  echo "EngineScript should be executed as the root user."
-  exit
+  then
+    echo "EngineScript should be executed as the root user."
+    exit
 fi
 
 #----------------------------------------------------------------------------

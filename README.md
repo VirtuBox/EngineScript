@@ -16,5 +16,6 @@ If you'd like to test EngineScript for yourself, just enter the command below in
 ```shell
 sudo apt update && sudo apt install curl && sudo curl -O https://raw.githubusercontent.com/VisiStruct/EngineScript/master/Initial-Setup.sh && sudo chmod 0700 Initial-Setup.sh && sudo bash Initial-Setup.sh
 ```
+Need a VPS? EngineScript recommends [Digital Ocean](https://m.do.co/c/e57cc8492285)
 
 ----------

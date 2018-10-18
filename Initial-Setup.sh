@@ -62,6 +62,9 @@ sleep 5
 sudo apt update
 sudo apt install software-properties-common python-software-properties -y
 
+# Set Time Zone
+sudo dpkg-reconfigure tzdata
+
 # Add Repositories
 sudo add-apt-repository -y ppa:ubuntu-toolchain-r/ppa
 sudo add-apt-repository -y ppa:maxmind/ppa

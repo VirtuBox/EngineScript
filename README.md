@@ -6,7 +6,7 @@ EngineScript automates the process of building a high-performance LEMP server. W
 
 ##### Requirements
 - Ubuntu 16.04 Xenial or 18.04 Bionic
-- 1GB RAM
+- 1GB+ RAM
 - Cloudflare (free or paid account)
 - 15 minutes of your time
 

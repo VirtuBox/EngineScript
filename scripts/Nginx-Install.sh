@@ -54,7 +54,7 @@ sudo curl https://raw.githubusercontent.com/centminmod/centminmod/master/patches
 # Compile Nginx
 cd /usr/src/nginx-${NGINX_VER}
 sudo ./configure \
-  --with-cc-opt='-m64 -O3 -g -march=native -mtune=native -fcode-hoisting -flto -fstack-protector-strong -fuse-ld=gold -Werror=format-security -Wformat -Wimplicit-fallthrough=0 -Wno-cast-function-type -Wno-deprecated-declarations -Wno-error=strict-aliasing --param=ssp-buffer-size=4 -Wp,-D_FORTIFY_SOURCE=2' \
+  --with-cc-opt='-m64 -march=native -mtune=native -DTCP_FASTOPEN=23 -O3 -g -fcode-hoisting -flto -fstack-protector-strong -fuse-ld=gold -Werror=format-security -Wformat -Wimplicit-fallthrough=0 -Wno-cast-function-type -Wno-deprecated-declarations -Wno-error=strict-aliasing --param=ssp-buffer-size=4 -Wp,-D_FORTIFY_SOURCE=2' \
   --with-ld-opt='-ljemalloc -Wl,-z,relro -Wl,--as-needed' \
   --conf-path=/etc/nginx/nginx.conf \
   --error-log-path=/var/log/nginx/error.log \

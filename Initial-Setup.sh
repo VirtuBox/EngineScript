@@ -135,6 +135,15 @@ sudo wget https://www.zlib.net/zlib-${ZLIB_VER}.tar.gz && sudo tar xzvf zlib-${Z
 # Set Editor
 export EDITOR=/bin/nano
 
+# Optimizing HTTP/2 and TCP Fast Open
+# https://blog.cloudflare.com/http-2-prioritization-with-nginx/
+cat <<EOT >> /etc/sysctl.conf
+net.core.default_qdisc = fq
+net.ipv4.tcp_congestion_control = bbr
+net.ipv4.tcp_notsent_lowat = 16384
+net.ipv4.tcp_fastopen = 3
+EOT
+
 # EngineScript Git Clone
 sudo rm -rf /usr/lib/EngineScript
 cd /usr/lib/
@@ -142,20 +151,12 @@ git clone https://github.com/VisiStruct/EngineScript.git
 echo ""
 echo "============================================================="
 echo ""
-echo "        EngineScript installation completed."
+echo "        EngineScript installed to:"
 echo ""
-echo "        EngineScript is located in /usr/lib/EngineScript"
+echo "        /usr/lib/EngineScript"
 echo ""
 echo "============================================================="
 sleep 2
-
-# Optimizing HTTP/2 prioritization with BBR and tcp_notsent_lowat
-# https://blog.cloudflare.com/http-2-prioritization-with-nginx/
-cat <<EOT >> /etc/sysctl.conf
-net.core.default_qdisc = fq
-net.ipv4.tcp_congestion_control = bbr
-net.ipv4.tcp_notsent_lowat = 16384
-EOT
 
 # Alias Creation
 cat <<EOT >> /root/.bashrc

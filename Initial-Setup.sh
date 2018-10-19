@@ -78,7 +78,7 @@ sudo apt upgrade -y
 sudo apt dist-upgrade -y
 sudo apt remove --purge mysql-server mysql-client mysql-common apache2* php5* nginx nginx-extras -y
 sudo rm -rf /var/lib/mysql
-sudo apt install autotools-dev axel bash-completion bc build-essential ccache checkinstall curl debhelper dh-systemd dos2unix gcc gcc-8 git glances g++-8 g++-8-multilib htop imagemagick libatomic-ops-dev libbsd-dev libbz2-1.0 libbz2-dev libbz2-ocaml libbz2-ocaml-dev libcurl4-openssl-dev libexpat-dev libgd-dev libgeoip-dev libgmp-dev libgoogle-perftools-dev libjemalloc-dev libjemalloc1 libluajit-5.1-common libluajit-5.1-dev libmcrypt-dev libmcrypt4 libmhash-dev libpam0g-dev libpcre3 libpcre3-dev libperl-dev libreadline-dev libssl-dev libtidy-dev libtool libxml2 libxml2-dev libxslt1-dev make mcrypt mlocate nano openssl perl pigz po-debconf pwgen python-jinja2 python-markupsafe python-pip python-psutil re2c ruby-dev software-properties-common sudo tar tree unzip webp wget zip zlib1g zlib1g-dbg zlib1g-dev zlibc -y
+sudo apt install autotools-dev axel bash-completion bc build-essential ccache checkinstall curl debhelper dh-systemd dos2unix gcc gcc-8 git glances g++-8 g++-8-multilib htop imagemagick libatomic-ops-dev libbsd-dev libbz2-1.0 libbz2-dev libbz2-ocaml libbz2-ocaml-dev libcurl4-openssl-dev libexpat-dev libgd-dev libgeoip-dev libgmp-dev libgoogle-perftools-dev libjemalloc-dev libjemalloc1 libluajit-5.1-common libluajit-5.1-dev libmcrypt-dev libmcrypt4 libmhash-dev libpam0g-dev libpcre3 libpcre3-dev libperl-dev libreadline-dev libssl-dev libtidy-dev libtool libxml2 libxml2-dev libxslt1-dev make mcrypt mlocate nano openssl perl pigz po-debconf pwgen python-jinja2 python-markupsafe python-pip python-psutil re2c ruby-dev software-properties-common sudo tar tree ufw unzip webp wget zip zlib1g zlib1g-dbg zlib1g-dev zlibc -y
 
 # Cleanup
 sudo apt autoremove -y
@@ -120,6 +120,12 @@ sudo make -f Makefile.in distclean
 ./configure --prefix=/usr/local/zlib-cf
 sudo make
 sudo make install
+
+# UFW
+sudo ufw allow 22
+sudo ufw allow 80
+sudo ufw allow 443
+echo "y" | sudo ufw enable
 
 # Official zlib Download\
 # Just in-case the user wants to use this instead of zlib-cf

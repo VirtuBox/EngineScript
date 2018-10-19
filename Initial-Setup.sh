@@ -145,9 +145,11 @@ sleep 2
 
 # Optimizing HTTP/2 prioritization with BBR and tcp_notsent_lowat
 # https://blog.cloudflare.com/http-2-prioritization-with-nginx/
+cat <<EOT >> /etc/sysctl.conf
 net.core.default_qdisc = fq
 net.ipv4.tcp_congestion_control = bbr
 net.ipv4.tcp_notsent_lowat = 16384
+EOT
 
 # Alias Creation
 cat <<EOT >> /root/.bashrc

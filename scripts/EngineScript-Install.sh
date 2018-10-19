@@ -37,5 +37,5 @@ sudo bash /usr/lib/EngineScript/scripts/Tools-Install.sh
 # Cleanup
 cd /usr/src
 rm -rf *.tar.gz*
-sudo apt autoremove -y
+sudo apt autoremove -y --purge
 sudo apt autoclean -y

@@ -40,16 +40,21 @@ sudo git clone https://github.com/eustas/ngx_brotli.git
 cd /usr/src/ngx_brotli
 sudo git submodule update --init --recursive
 
-# Patch Nginx and OpenSSL
-# These patches will change based on Nginx release. Don't assume they will always work with a new release.
+# Patch Nginx
+# These patches will change based on release. Don't assume they will work with a release other than the version they are intended for.
 cd /usr/src/nginx-${NGINX_VER}
 sudo curl https://raw.githubusercontent.com/nginx-modules/ngx_http_tls_dyn_size/master/nginx__dynamic_tls_records_1.15.5%2B.patch | patch -p1
 sudo curl https://raw.githubusercontent.com/centminmod/centminmod/123.09beta01/patches/cloudflare/nginx-1.15.3_http2-hpack.patch | patch -p1
 sudo curl https://raw.githubusercontent.com/kn007/patch/master/nginx_auto_using_PRIORITIZE_CHACHA.patch | patch -p1
+
+# Patch OpenSSL
+# These patches will change based on release. Don't assume they will work with a release other than the version they are intended for.
 cd /usr/src/openssl-${OPENSSL_VER}
 sudo curl https://raw.githubusercontent.com/hakasenyang/openssl-patch/master/openssl-equal-1.1.1.patch | patch -p1
 sudo curl https://raw.githubusercontent.com/centminmod/centminmod/master/patches/openssl/OpenSSL-1.1.1-reset-tls1.3-ciphers-SSL_CTX_set_ssl_version.patch | patch -p1
 sudo curl https://raw.githubusercontent.com/centminmod/centminmod/master/patches/openssl/OpenSSL-1.1.1-sni-fix-delay-sig-algs.patch | patch -p1
+sudo curl https://raw.githubusercontent.com/centminmod/centminmod/123.09beta01/patches/openssl/OpenSSL-1.1.1-fix-ocsp-memleak.patch | patch -p1
+sudo curl https://raw.githubusercontent.com/centminmod/centminmod/123.09beta01/patches/openssl/OpenSSL-1.1.1-safer-mem-cleanup.patch | patch -p1
 
 # Compile Nginx
 cd /usr/src/nginx-${NGINX_VER}

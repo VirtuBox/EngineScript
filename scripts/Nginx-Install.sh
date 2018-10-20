@@ -109,7 +109,6 @@ sudo rm -rf /lib/systemd/system/nginx.service
 sudo wget https://raw.githubusercontent.com/VisiStruct/EngineScript/master/misc/systemd/nginx.service -O /lib/systemd/system/nginx.service
 
 # Create Nginx Directories
-sudo mkdir -p /etc/nginx/conf.d
 sudo mkdir -p /etc/nginx/globals
 sudo mkdir -p /etc/nginx/scripts
 sudo mkdir -p /etc/nginx/sites-available
@@ -142,7 +141,7 @@ sleep 3
 
 # Retrieve EngineScript Nginx .conf Files
 sudo wget https://raw.githubusercontent.com/VisiStruct/EngineScript/master/nginx/nginx.conf -O /etc/nginx/nginx.conf
-sudo wget https://raw.githubusercontent.com/VisiStruct/EngineScript/master/nginx/conf.d/default.conf -O /etc/nginx/conf.d/default.conf
+sudo wget https://raw.githubusercontent.com/VisiStruct/EngineScript/master/nginx/sites-enabled/default.conf -O /etc/nginx/sites-enabled/default.conf
 sudo wget https://raw.githubusercontent.com/VisiStruct/EngineScript/master/nginx/globals/errorpages.conf -O /etc/nginx/globals/errorpages.conf
 sudo wget https://raw.githubusercontent.com/VisiStruct/EngineScript/master/nginx/globals/fileheaders.conf -O /etc/nginx/globals/fileheaders.conf
 sudo wget https://raw.githubusercontent.com/VisiStruct/EngineScript/master/nginx/globals/phpwpcommon.conf -O /etc/nginx/globals/phpwpcommon.conf

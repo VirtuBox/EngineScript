@@ -186,9 +186,10 @@ while true;
   done
 
 # Domain Creation Variables
-SDB="ESwp${RAND_CHAR2}"
-SUSR="ESwp${RANDOM}${RANDOM}"
-SPS="ESwp${RAND_CHAR2}${RAND_CHAR}${DT}"
+SDB="ES${RAND_CHAR8}"
+SUSR="${RAND_CHAR16}"
+SPS="${RAND_CHAR32}"
+PREFIX="$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 2 | head -n 1)"
 
 # Domain Database Credentials
 echo "DB=${SDB}" >> /home/EngineScript/user-data/mysql-credentials/${DOMAIN}.txt

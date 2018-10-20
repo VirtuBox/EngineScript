@@ -42,7 +42,7 @@ if [ "${UBUNTU_VER}" = bionic ];
 fi
 
 # MYSQL Variables
-MYSQL_RPS="ES${RANDOM}WP${RAND_CHAR}U"
+MYSQL_RPS="${RAND_CHAR24}"
 echo "MYSQL_RP=${MYSQL_RPS}" > /home/EngineScript/user-data/mysql-credentials/mysqlrp.txt
 source /home/EngineScript/user-data/mysql-credentials/mysqlrp.txt
 

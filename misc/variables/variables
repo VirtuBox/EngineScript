@@ -1,8 +1,6 @@
 # EngineScript Variables
-CPU_COUNT="$(nproc --all)"
-CURRENT_PATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-DT="$(date +"%m-%d-%y")"
-IP_ADDRESS="$(ip -o route get to 8.8.8.8 | sed -n 's/.*src \([0-9.]\+\).*/\1/p')"
+
+# Software Versions
 MARIADB_VER="10.3"
 NGINX_HEADER_VER="0.33"
 NGINX_PURGE_VER="2.5"
@@ -11,11 +9,18 @@ OPENSSL_VER="1.1.1"
 PCRE_VER="8.42"
 PHPMYADMIN_VER="4.8.3"
 PHP_VER="7.2"
-PREFIX="$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 2 | head -n 1)"
-RAND_CHAR="$(pwgen 9 1)"
-RAND_CHAR2="$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 12 | head -n 1)"
-UBUNTU_VER="$(lsb_release -sc)"
 ZLIB_VER="1.2.11"
+
+# Script Variables
+CPU_COUNT="$(nproc --all)"
+CURRENT_PATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+DT="$(date +"%m-%d-%y")"
+IP_ADDRESS="$(ip -o route get to 8.8.8.8 | sed -n 's/.*src \([0-9.]\+\).*/\1/p')"
+RAND_CHAR8="$(pwgen -1Bcns 8)"
+RAND_CHAR16="$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 16 | head -n 1)"
+RAND_CHAR24="$(date +%s | sha256sum | base64 | head -c 24)"
+RAND_CHAR32="$(pwgen -1Bcns 32)"
+UBUNTU_VER="$(lsb_release -sc)"
 
 # Shell text
 BOLD="$(tput bold)"

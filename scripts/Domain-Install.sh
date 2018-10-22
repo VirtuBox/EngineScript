@@ -267,7 +267,6 @@ MySQL Root and Domain login credentials backed up to:
 /home/EngineScript/user-data/mysql-credentials/${SITE_URL}
 -==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-
 
-
 Origin Certificate and Private Key have been backed up to:
 /home/EngineScript/user-data/ssl-backups/${SITE_URL}
 -==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-

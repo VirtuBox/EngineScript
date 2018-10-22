@@ -58,16 +58,30 @@ sleep 5
 
 # MYSQLTuner Install
 sudo mkdir -p /usr/lib/mysqltuner
-cd /usr/lib/mysqltuner
-sudo wget http://mysqltuner.pl/ -O mysqltuner.pl
-sudo wget https://raw.githubusercontent.com/major/MySQLTuner-perl/master/basic_passwords.txt -O basic_passwords.txt
-sudo wget https://raw.githubusercontent.com/major/MySQLTuner-perl/master/vulnerabilities.csv -O vulnerabilities.csv
+sudo wget http://mysqltuner.pl/ -O /usr/lib/mysqltuner/mysqltuner.pl
+sudo wget -O /usr/lib/mysqltuner/basic_passwords.txt https://raw.githubusercontent.com/major/MySQLTuner-perl/master/basic_passwords.txt
+sudo wget -O /usr/lib/mysqltuner/vulnerabilities.csv https://raw.githubusercontent.com/major/MySQLTuner-perl/master/vulnerabilities.csv
 echo ""
 echo "============================================================="
 echo ""
 echo "        MySQLTuner installed."
 echo ""
 echo "        To run MySQLTuner, type perl /usr/lib/mysqltuner/mysqltuner.pl"
+echo ""
+echo "============================================================="
+echo ""
+sleep 5
+
+# Tuning-Primer Install
+sudo mkdir -p /usr/lib/tuning-primer
+wget https://raw.githubusercontent.com/mattiabasone/tuning-primer/master/tuning-primer.sh -O /usr/lib/tuning-primer/tuning-primer.sh
+sudo chmod 755 /usr/lib/tuning-primer/tuning-primer.sh
+echo ""
+echo "============================================================="
+echo ""
+echo "        Tuning-Primer installed."
+echo ""
+echo "        To run Tuning-Primer, type bash /usr/lib/tuning-primer/tuning-primer.sh"
 echo ""
 echo "============================================================="
 echo ""

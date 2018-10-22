@@ -111,7 +111,7 @@ sudo rm -rf /etc/nginx/*.default
 
 # Nginx Service Start Dance
 sudo rm -rf /lib/systemd/system/nginx.service
-sudo wget https://raw.githubusercontent.com/VisiStruct/EngineScript/master/misc/systemd/nginx.service -O /lib/systemd/system/nginx.service
+sudo cp -p /usr/lib/EngineScript/misc/systemd/nginx.service /lib/systemd/system/nginx.service
 
 # Create Nginx Directories
 sudo mkdir -p /etc/nginx/globals
@@ -145,30 +145,27 @@ sudo cp -r /etc/nginx/globals /home/EngineScript/user-data/config-backups/nginx/
 sleep 3
 
 # Retrieve EngineScript Nginx .conf Files
-sudo wget https://raw.githubusercontent.com/VisiStruct/EngineScript/master/nginx/nginx.conf -O /etc/nginx/nginx.conf
-sudo wget https://raw.githubusercontent.com/VisiStruct/EngineScript/master/nginx/sites-enabled/default.conf -O /etc/nginx/sites-enabled/default.conf
-sudo wget https://raw.githubusercontent.com/VisiStruct/EngineScript/master/nginx/globals/errorpages.conf -O /etc/nginx/globals/errorpages.conf
-sudo wget https://raw.githubusercontent.com/VisiStruct/EngineScript/master/nginx/globals/fileheaders.conf -O /etc/nginx/globals/fileheaders.conf
-sudo wget https://raw.githubusercontent.com/VisiStruct/EngineScript/master/nginx/globals/phpwpcommon.conf -O /etc/nginx/globals/phpwpcommon.conf
-sudo wget https://raw.githubusercontent.com/VisiStruct/EngineScript/master/nginx/globals/wpsecurity.conf -O /etc/nginx/globals/wpsecurity.conf
+sudo cp -p /usr/lib/EngineScript/nginx/nginx.conf -O /etc/nginx/nginx.conf
+sudo cp -p /usr/lib/EngineScript/nginx/sites-enabled/default.conf /etc/nginx/sites-enabled/default.conf
+sudo cp -p /usr/lib/EngineScript/nginx/globals/errorpages.conf /etc/nginx/globals/errorpages.conf
+sudo cp -p /usr/lib/EngineScript/nginx/globals/fileheaders.conf /etc/nginx/globals/fileheaders.conf
+sudo cp -p /usr/lib/EngineScript/nginx/globals/phpwpcommon.conf /etc/nginx/globals/phpwpcommon.conf
+sudo cp -p /usr/lib/EngineScript/nginx/globals/wpsecurity.conf /etc/nginx/globals/wpsecurity.conf
 
 # Retrieve Logrotate File
-sudo wget https://raw.githubusercontent.com/VisiStruct/EngineScript/master/misc/logrotate/nginx -O /etc/logrotate.d/nginx
+sudo cp -p /usr/lib/EngineScript/misc/logrotate/nginx /etc/logrotate.d/nginx
 
 # Retrieve Cloudflare Origin Pull Cert
 sudo wget -O /etc/nginx/ssl/cloudflare/origin-pull-ca.pem https://support.cloudflare.com/hc/en-us/article_attachments/201243967/origin-pull-ca.pem
 
-# Cloudflare
 # Run Cloudflare Script and Write .conf File
-sudo chmod +x /usr/lib/EngineScript/misc/cron/cloudflare-nginx-ip-updater.sh
-sudo bash //usr/lib/EngineScript/misc/cron/cloudflare-nginx-ip-updater.sh
+sudo bash /usr/lib/EngineScript/misc/cron/cloudflare-nginx-ip-updater.sh
 
 # Create Cloudflare Origin Pull Cert Monthly Cron
-sudo chmod +x /usr/lib/EngineScript/misc/cron/cfipopc.sh
 sudo bash /usr/lib/EngineScript/misc/cron/cfipopc.sh
 
 # Copy Cron
-sudo cp /usr/lib/EngineScript/misc/cron/cloudflare-cron /etc/cron.d/cloudflare-cron
+sudo cp -p /usr/lib/EngineScript/misc/cron/cloudflare-cron /etc/cron.d/cloudflare-cron
 
 # Cloudflare Origin Pull Certificate
 echo ""

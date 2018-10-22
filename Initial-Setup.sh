@@ -150,7 +150,7 @@ cd /usr/src/
 sudo wget https://www.zlib.net/zlib-${ZLIB_VER}.tar.gz && sudo tar xzvf zlib-${ZLIB_VER}.tar.gz
 
 # Set Editor
-export EDITOR=/bin/nano
+update-alternatives --set editor /bin/nano
 
 # Optimizing HTTP/2 and TCP Fast Open
 # https://blog.cloudflare.com/http-2-prioritization-with-nginx/
@@ -174,6 +174,10 @@ echo "        /usr/lib/EngineScript"
 echo ""
 echo "============================================================="
 sleep 2
+
+# EngineScript Permissions
+sudo find /usr/lib/EngineScript/ -type d,f -exec chmod 755 {} \;
+sudo chown -hR root:root /usr/lib/EngineScript/
 
 # Alias Creation
 cat <<EOT >> /root/.bashrc

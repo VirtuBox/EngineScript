@@ -64,6 +64,13 @@ y
 y
 EOF
 
+# Copy my.cnf file.
+# Config is set for a 1GB RAM VPS. You'll need to tune for higher RAM values.
+sudo cp -p /usr/lib/EngineScript/mysql/my.cnf /etc/mysql/my.cnf
+
+# Restart
+service mysql restart
+
 # MySQL Login Details Display
 echo ""
 echo "Your MySQL Login Details:"
@@ -71,7 +78,7 @@ echo "  User: root"
 echo "  Pass: ${MYSQL_RP}"
 echo ""
 echo "Your password has been stored in /home/EngineScript/user-data/mysql-credentials/mysqlrp.txt"
-sleep 10
+sleep 5
 
 echo ""
 echo "============================================================="

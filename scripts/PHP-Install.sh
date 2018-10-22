@@ -40,8 +40,8 @@ echo "Backing up existing php.ini. Backup can be found in /home/EngineScript/use
 sudo cp -r /etc/php/7.2/fpm/php.ini /home/EngineScript/user-data/config-backups/php/
 sleep 3
 
-# Retreive EngineScript php.ini
-sudo wget -O /etc/php/7.2/fpm/php.ini https://raw.githubusercontent.com/VisiStruct/EngineScript/master/php/php.ini
+# Retrieve EngineScript php.ini
+sudo cp -p /usr/lib/EngineScript/php/php.ini /etc/php/7.2/fpm/php.ini
 
 # Restart PHP
 sudo service php7.2-fpm restart

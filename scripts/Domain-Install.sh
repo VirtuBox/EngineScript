@@ -216,7 +216,7 @@ sudo rm -f /var/www/${SITE_URL}/html/wp-content/plugins/hello.php
 sudo mkdir -p /var/www/${SITE_URL}/html/wp-content/uploads
 
 # Create wp-config.php
-sudo wget -O /var/www/${SITE_URL}/html/wp-config.php https://raw.githubusercontent.com/VisiStruct/EngineScript/master/misc/wp/wp-config.php
+sudo cp -p /usr/lib/EngineScript/misc/wp/wp-config.php /var/www/${SITE_URL}/html/wp-config.php
 sudo sed -i "s|SEDWPDB|${DB}|g" /var/www/${SITE_URL}/html/wp-config.php
 sudo sed -i "s|SEDWPUSER|${USR}|g" /var/www/${SITE_URL}/html/wp-config.php
 sudo sed -i "s|SEDWPPASS|${PSWD}|g" /var/www/${SITE_URL}/html/wp-config.php
@@ -234,7 +234,7 @@ sudo find /var/www/${SITE_URL}/html/ -type f -exec chmod 644 {} \;
 sudo chown -hR www-data:www-data /var/www/${SITE_URL}/html/
 
 # Create Domain Vhost File
-sudo wget -O /etc/nginx/sites-enabled/${SITE_URL}.conf https://raw.githubusercontent.com/VisiStruct/EngineScript/master/nginx/sites-enabled/yourdomain.com.conf
+sudo cp -p /usr/lib/EngineScript/nginx/sites-enabled/yourdomain.com.conf /etc/nginx/sites-enabled/${SITE_URL}.conf
 sudo sed -i "s|yourdomain.com|${SITE_URL}|g" /etc/nginx/sites-enabled/${SITE_URL}.conf
 
 # Backup Dir Creation
